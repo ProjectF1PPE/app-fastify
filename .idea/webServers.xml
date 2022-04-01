@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="WebServers">
+    <option name="servers">
+      <webServer id="81794a5f-1f18-436e-9d47-59ace81f0d8e" name="casf1" url="http://217.182.70.57">
+        <fileTransfer rootFolder="/home/debian/casf1/app" accessType="SFTP" host="217.182.70.57" port="22" sshConfigId="d071775a-5044-4c34-9fd9-14054eadb58a" sshConfig="debian@217.182.70.57:22 password">
+          <advancedOptions>
+            <advancedOptions dataProtectionLevel="Private" keepAliveTimeout="0" passiveMode="true" shareSSLContext="true" />
+          </advancedOptions>
+        </fileTransfer>
+      </webServer>
+    </option>
+  </component>
+</project>
