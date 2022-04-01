@@ -17,7 +17,7 @@
     <script src="../Includes/navbar.js"></script>
 </head>
 
-<?php require '../Includes/header.php'; ?>
+<?php require '../Includes/header.html'; ?>
 <body>
         <div class="container">
             <div id='lesCartes'></div>

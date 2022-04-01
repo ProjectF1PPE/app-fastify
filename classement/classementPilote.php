@@ -16,7 +16,7 @@
     <script src="classementpilotes.js"></script>
 </head>
 
-<?php require '../Includes/header.php'; ?>
+<?php require '../Includes/header.html'; ?>
 
 <body>
 <div class="container-fluid">

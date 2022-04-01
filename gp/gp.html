@@ -15,11 +15,11 @@
     <script src="//code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="gp.js"></script>
     <script src="../Includes/navbar.js"></script>
+    <script>
+    $(function(){
+        $("#navbar").load("../Includes/header.html");
+    });
+</script>
 </head>
-<?php require '../Includes/header.php'; ?>
-<body>
-    <div class="container">
-        <div id = "lesCartes">
-        </div>
-    </div>
-</body>
+
+<div id="navbar"></div>

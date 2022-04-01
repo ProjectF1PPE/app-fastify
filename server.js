@@ -25,7 +25,7 @@ fastify.get('/ecuries', async (request, reply) => {
 });
 
 fastify.get('/gp', async (request, reply) => {
-    reply.sendFile('ecurie/ecuries.html');
+    reply.sendFile('gp/gp.html');
 });
 
 const start = async () => {
