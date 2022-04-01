@@ -20,6 +20,14 @@ fastify.get('/', async (request, reply) => {
     reply.sendFile('index.html');
 });
 
+fastify.get('/ecuries', async (request, reply) => {
+    reply.sendFile('ecurie/ecuries.html');
+});
+
+fastify.get('/gp', async (request, reply) => {
+    reply.sendFile('ecurie/ecuries.html');
+});
+
 const start = async () => {
     try {
         await fastify.listen(8080, '0.0.0.0')

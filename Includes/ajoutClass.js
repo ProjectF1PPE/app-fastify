@@ -7,7 +7,7 @@ function ajoutClass() {
     let ob = null;
 
     switch (lastItem) {
-        case 'ecuries.php':
+        case 'ecuries.html':
             ob = document.getElementById('ajtclassEcurie');
             break;
         case 'gp.php':

@@ -10,7 +10,7 @@
                 <ul class="navbar-nav ml-auto">
                     <li><a href="../pilote/pilote.php" id="ajtPilote"class="nav-item nav-link ">Pilotes</a></li>
                     <li class="dropdown ">
-                        <a href="../ecurie/ecuries.php" id="ajtclassEcurie" class="nav-item nav-link" data-toggle="dropdown">Ecuries</a>
+                        <a href="ecurie/ecuries.html" id="ajtclassEcurie" class="nav-item nav-link" data-toggle="dropdown">Ecuries</a>
                     </li>
                     <li><a href="../gp/gp.php" id="ajtclassGp" class="nav-item nav-link">Grands Prix</a></li>
                     <li class="dropdown">
@@ -37,7 +37,7 @@
                     <a class="nav-link" href="../pilote/pilote.php">Pilotes<span class="sr-only">(current)</span></a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="../ecurie/ecuries.php">Ecuries</a>
+                    <a class="nav-link" href="ecurie/ecuries.html">Ecuries</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="../gp/gp.php">Grands Prix</a>
