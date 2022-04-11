@@ -17,7 +17,7 @@ function ajoutClass() {
         case 'classementPilote.php':
             ob = document.getElementById('ajtclassClassement');
             break;
-        case 'pilote.php':
+        case 'pilote.html':
             ob = document.getElementById('ajtPilote');
             break;
     }

@@ -2,6 +2,7 @@ const fastify = require('fastify')({
     logger: true
 });
 const path = require("path");
+const fastifyStatic = require("fastify-static");
 
 fastify.register(require('fastify-swagger'), {
     exposeRoute: true,
@@ -11,9 +12,14 @@ fastify.register(require('fastify-swagger'), {
     }
 });
 
-fastify.register(require('fastify-static'), {
-    root: path.join(__dirname, '.'),
-    prefix: '/'
+fastify.register(fastifyStatic, {
+    root: path.join(__dirname, 'public')
+})
+
+fastify.register(fastifyStatic, {
+    root: path.join(__dirname, 'public/scripts'),
+    prefix: '/scripts/',
+    decorateReply: false
 });
 
 fastify.get('/', async (request, reply) => {
@@ -22,6 +28,24 @@ fastify.get('/', async (request, reply) => {
 
 fastify.get('/ecuries', async (request, reply) => {
     reply.sendFile('ecurie/ecuries.html');
+});
+
+fastify.get('/pilotes', async (request, reply) => {
+    reply.sendFile('pilote/pilote.html');
+});
+
+fastify.get('/ecurie', async (request, reply) => {
+    return {
+        id: 'zdzdz',
+        name: 'zdzdz'
+    }
+});
+
+fastify.get('/pilote', async (request, reply) => {
+    return [
+        {id: "23", nom: "Serein", prenom: "ENzo", description: 'Beau pilote'},
+        {id: "22", nom: "Tsunoda", prenom: "Yuki", description: 'Magnifique pilote'}
+    ]
 });
 
 fastify.get('/gp', async (request, reply) => {

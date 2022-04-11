@@ -1,26 +1,16 @@
 "use strict";
 
-window.onload = init;
-
-function init() {
-    /*
-    // A METTRE QUAND SQL MARCHERA
-    $.ajax({
-        url: "ajax/getlespilotes.php",
-        type: 'post',
-        dataType: "json",
-        success: afficher,
-        error: reponse => console.log(reponse.responseText)
+window.addEventListener('load', async () => {
+    await fetch('/pilote').then(response => {
+        if (response.ok) {
+            response.json().then(afficher);
+            return;
+        }
+        console.log('Erreur lors du chargements des pilotes !');
+    }).catch(error => {
+        console.log('Erreur avec fetch : ' + error.message);
     });
-     */
-
-    // EN ATTENDANT POUR FAIRE DES TESTS
-    let lesPilotes = [
-        {id: "77", nom: "Bottas", prenom: "Valtteri", description: 'Super pilote'},
-        {id: "22", nom: "Tsunoda", prenom: "Yuki", description: 'Magnifique pilote'}
-    ]
-    afficher(lesPilotes)
-}
+})
 
 // affichage des données retournées
 function afficher(data) {

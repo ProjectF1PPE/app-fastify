@@ -5,9 +5,15 @@
 let lesPays
 let lesPilotes
 
-window.onload = init;
+window.addEventListener('load', async () => {
+    const response = await fetch('/ecurie');
+    const ecuries = await response.json();
 
-function init() {
+    afficher(remplirLesDonnees(ecuries));
+})
+
+async function init() {
+    /*
     $.ajax({
         url: "ajax/getlesecuries.php",
         dataType: "json",
@@ -15,11 +21,11 @@ function init() {
         error: reponse => console.log(reponse.reponseText)
     });
 
-   /* // SINON ON FAIT CA EN ATTENDANT POUR QUAND MEME POUVOIR FAIRE DES TESTS
-    let lesEcuries = [
-        {id: "1", nom: "Carrefour", idPays: "1", pilotes: ["1", "2"]},
-        {id: "2", nom: "Auchan", idPays: "2", pilotes: ["2", "1"]}
-    ] */
+    /* // SINON ON FAIT CA EN ATTENDANT POUR QUAND MEME POUVOIR FAIRE DES TESTS
+     let lesEcuries = [
+         {id: "1", nom: "Carrefour", idPays: "1", pilotes: ["1", "2"]},
+         {id: "2", nom: "Auchan", idPays: "2", pilotes: ["2", "1"]}
+     ] */
     //afficher(remplirLesDonnees())
 }
 
