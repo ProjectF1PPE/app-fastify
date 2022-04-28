@@ -4,6 +4,11 @@ const fastify = require('fastify')({
 const path = require("path");
 const fastifyStatic = require("fastify-static");
 
+fastify.register(require('fastify-mysql'), {
+    promise: true,
+    connectionString: 'mysql://debian:3M75B4fKWbsr@localhost/mysql'
+})
+
 fastify.register(require('fastify-swagger'), {
     exposeRoute: true,
     routePrefix: '/docs',
@@ -35,17 +40,17 @@ fastify.get('/pilotes', async (request, reply) => {
 });
 
 fastify.get('/ecurie', async (request, reply) => {
-    return {
-        id: 'zdzdz',
-        name: 'zdzdz'
-    }
+    const connection = await fastify.mysql.getConnection()
+    const [rows] = await connection.query('Select id, nom, prenom, ordre from pilote order by id')
+    connection.release()
+    return rows[0]
 });
 
 fastify.get('/pilote', async (request, reply) => {
-    return [
-        {id: "23", nom: "Serein", prenom: "ENzo", description: 'Beau pilote'},
-        {id: "22", nom: "Tsunoda", prenom: "Yuki", description: 'Magnifique pilote'}
-    ]
+    const connection = await fastify.mysql.getConnection()
+    const [rows] = await connection.query('Select id, nom, prenom, ordre from pilote order by id')
+    connection.release()
+    return rows[0]
 });
 
 fastify.get('/gp', async (request, reply) => {
