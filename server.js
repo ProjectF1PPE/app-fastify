@@ -22,7 +22,9 @@ fastify.register(require('fastify-swagger'), {
 fastify.register(fastifyStatic, {
     root: path.join(__dirname, 'public'),
     prefix: '/',
-})
+});
+
+fastify.register(require('./routes/ecurie'));
 
 /*
 fastify.register(fastifyStatic, {
@@ -77,16 +79,18 @@ fastify.register(fastifyStatic, {
     root: path.join(__dirname, 'public', 'modules', 'navbar'),
     decorateReply: false
 });
-
  */
 
 fastify.get('/', async (request, reply) => {
     reply.sendFile('index.html');
 });
 
+/*
 fastify.get('/ecuries', async (request, reply) => {
     reply.sendFile('ecuries.html', path.join(__dirname, 'public', 'pages', 'ecurie'));
 });
+
+ */
 
 fastify.get('/pilotes', async (request, reply) => {
     reply.sendFile('pages/pilote/pilotes.html');
@@ -96,12 +100,15 @@ fastify.get('/gp', async (request, reply) => {
     reply.sendFile('pages/gp/gp.html');
 });
 
+/*
 fastify.get('/ecurie', async (request, reply) => {
     const connection = await fastify.mysql.getConnection()
     const [rows] = await connection.query('Select id, nom, prenom, ordre from pilote order by id')
     connection.release()
     return rows[0]
 });
+
+ */
 
 fastify.get('/pilote', async (request, reply) => {
     const connection = await fastify.mysql.getConnection()
