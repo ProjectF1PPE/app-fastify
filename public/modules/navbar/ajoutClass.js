@@ -8,22 +8,21 @@ function ajoutClass() {
 
     switch (lastItem) {
         case 'ecuries.html':
-            ob = document.getElementById('ajtclassEcurie');
+            ob = document.getElementById('ecuries');
             break;
-        case 'gp.php':
-            ob = document.getElementById('ajtclassG');
+        case 'gp.html':
+            ob = document.getElementById('gp');
             break;
-        case 'classementEcurie.php ':
+        case "classementEcuries.php":
         case 'classementPilote.php':
-            ob = document.getElementById('ajtclassClassement');
+            ob = document.getElementById('classement');
             break;
-        case 'pilote.html':
-            ob = document.getElementById('ajtPilote');
+        case 'pilotes.html':
+            ob = document.getElementById('pilotes');
             break;
     }
 
     if (ob != null){
         ob.classList.add('active');
     }
-
 }

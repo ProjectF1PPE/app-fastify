@@ -9,7 +9,6 @@ fastify.register(require('fastify-mysql'), {
     promise: true,
     connectionString: 'mysql://debian:3M75B4fKWbsr@localhost/mysql'
 })
-
  */
 
 fastify.register(require('fastify-swagger'), {
@@ -21,25 +20,80 @@ fastify.register(require('fastify-swagger'), {
 });
 
 fastify.register(fastifyStatic, {
-    root: path.join(__dirname, 'public')
+    root: path.join(__dirname, 'public'),
+    prefix: '/',
 })
 
+/*
 fastify.register(fastifyStatic, {
-    root: path.join(__dirname, 'public/scripts'),
-    prefix: '/scripts/',
+    root: path.join(__dirname, 'public', 'pages'),
+    prefix: '/pages/',
+    list: true,
+    decorateReply: false
+})
+
+ */
+
+/*
+fastify.register(fastifyStatic, {
+    root: path.join(__dirname, 'public', 'pages'),
+    prefix: '/pages/',
+    decorateReply: false
+})
+
+/*
+fastify.register(fastifyStatic, {
+    root: path.join(__dirname, 'public', 'pages', 'gp', 'circuit'),
+    prefix: '/pages/gp/circuit/',
+    list: true,
+    decorateReply: false
+})
+
+/*
+fastify.register(fastifyStatic, {
+    root: path.join(__dirname, 'public', 'pages'),
     decorateReply: false
 });
+
+/*
+fastify.register(fastifyStatic, {
+    root: path.join(__dirname, 'public', 'pages', 'ecurie'),
+    decorateReply: false
+});
+
+/*
+
+fastify.register(fastifyStatic, {
+    root: path.join(__dirname, 'public', 'pages', 'pilote'),
+    decorateReply: false
+});
+
+fastify.register(fastifyStatic, {
+    root: path.join(__dirname, 'public', 'modules', 'footer'),
+    decorateReply: false
+});
+
+fastify.register(fastifyStatic, {
+    root: path.join(__dirname, 'public', 'modules', 'navbar'),
+    decorateReply: false
+});
+
+ */
 
 fastify.get('/', async (request, reply) => {
     reply.sendFile('index.html');
 });
 
 fastify.get('/ecuries', async (request, reply) => {
-    reply.sendFile('pages/ecurie/ecuries.html');
+    reply.sendFile('ecuries.html', path.join(__dirname, 'public', 'pages', 'ecurie'));
 });
 
 fastify.get('/pilotes', async (request, reply) => {
-    reply.sendFile('pilote/pilote.html');
+    reply.sendFile('pages/pilote/pilotes.html');
+});
+
+fastify.get('/gp', async (request, reply) => {
+    reply.sendFile('pages/gp/gp.html');
 });
 
 fastify.get('/ecurie', async (request, reply) => {
@@ -54,10 +108,6 @@ fastify.get('/pilote', async (request, reply) => {
     const [rows] = await connection.query('Select id, nom, prenom, ordre from pilote order by id')
     connection.release()
     return rows[0]
-});
-
-fastify.get('/gp', async (request, reply) => {
-    reply.sendFile('gp/gp.html');
 });
 
 const start = async () => {

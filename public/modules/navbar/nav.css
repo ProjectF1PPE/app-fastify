@@ -149,36 +149,20 @@
     color:white;
     padding-right: 5%;
 }
-body {
-    background:linear-gradient(to bottom, black 80%, red);
-    font-family: 'Josefin Sans', sans-serif;
-    list-style-type: none;
-    background-repeat: no-repeat;
-    background-size: 100% 100%;
-    background-attachment: fixed;
-    margin-top:10%;
-}
 
-
-footer {
-    color: white;
-    margin-left:45%;
-}
 .mobile{
     display:none;
 }
 .pc {
     display:block;
 }
+
 @media screen and (max-width: 767px) {
     .mobile {
         display:block;
     }
     .pc {
         display:none;
-    }
-    footer{
-        margin-left:15%;
     }
     .admin{
 

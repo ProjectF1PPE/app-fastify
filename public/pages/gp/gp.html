@@ -13,17 +13,30 @@
     <link href="../../style.css" rel="stylesheet"/>
 
     <script src="//code.jquery.com/jquery-3.6.0.min.js"></script>
-    <script src="gp.js"></script>
+    <script src="/pages/gp/gp.js"></script>
 </head>
 
 <body>
 
 <div id="nav-placeholder"></div>
-
 <script>
     $(() => {
-        $("#nav-placeholder").load("../../navbar/nav.html");
+        $("#nav-placeholder").load("modules/navbar/nav.html");
     })
 </script>
+
+<div class="container">
+    <div id = "lesCartes">
+    </div>
+</div>
+
+<div id="footer-placeholder"></div>
+<script>
+    $(() => {
+        $("#footer-placeholder").load("modules/footer/footer.html");
+    })
+</script>
+
+
 
 </body>

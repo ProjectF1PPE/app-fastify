@@ -13,19 +13,29 @@
     <link href="style.css" rel="stylesheet"/>
 
     <script src="//code.jquery.com/jquery-3.6.0.min.js"></script>
-    <script src="../../scripts/pilote.js"></script>
-    <script src="../../navbar/nav.js"></script>
+    <script src="/pages/pilote/pilote.js"></script>
 </head>
 
-<?php require '../Includes/header.html'; ?>
 <body>
-        <div class="container">
-            <div id='lesCartes'></div>
 
-        </div>
+<div id="nav-placeholder"></div>
+<script>
+    $(() => {
+        $("#nav-placeholder").load("modules/navbar/nav.html");
+    })
+</script>
 
-        <footer>
-             ©Nedhor 2022 – Tous droits réservés
-        </footer>
+<div class="container">
+    <div id='lesCartes'></div>
+
+</div>
+
+<div id="footer-placeholder"></div>
+<script>
+    $(() => {
+        $("#footer-placeholder").load("modules/footer/footer.html");
+    })
+</script>
+
 </body>
 </html>
