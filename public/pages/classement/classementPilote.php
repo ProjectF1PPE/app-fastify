@@ -10,13 +10,14 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet"
           integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css">
-    <link href="style.css" rel="stylesheet"/>
+    <link href="public/pages/classement/style.css" rel="stylesheet"/>
 
     <script src="//code.jquery.com/jquery-3.6.0.min.js"></script>
-    <script src="classementpilotes.js"></script>
+    <script src="public/pages/classement/classementpilotes.js"></script>
 </head>
 
 <?php require '../Includes/header.html'; ?>
+
 <body>
 <div class="container-fluid">
 
@@ -29,12 +30,9 @@
                         <thead>
                         <tr>
                             <th style='width:15%'>Position</th>
-                            <th style='width:15%'>Ecuries</th>
-                            <th style='width:15%'>Points</th>
                             <th style='width:15%'>Nom</th>
-                            <th style='width:15%'>Point</th>
-                            <th style='width:15%'>grandPrix</th>
-                            <th style='width:15%'>Drapeau</th>
+                            <th style='width:15%'>Prénom</th>
+                            <th style='width:15%'>Points</th>
                         </tr>
                         </thead>
                         <tbody id="lesLignes"></tbody>

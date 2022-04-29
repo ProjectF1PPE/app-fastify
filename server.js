@@ -4,10 +4,13 @@ const fastify = require('fastify')({
 const path = require("path");
 const fastifyStatic = require("fastify-static");
 
+/*
 fastify.register(require('fastify-mysql'), {
     promise: true,
     connectionString: 'mysql://debian:3M75B4fKWbsr@localhost/mysql'
 })
+
+ */
 
 fastify.register(require('fastify-swagger'), {
     exposeRoute: true,
@@ -32,7 +35,7 @@ fastify.get('/', async (request, reply) => {
 });
 
 fastify.get('/ecuries', async (request, reply) => {
-    reply.sendFile('ecurie/ecuries.html');
+    reply.sendFile('pages/ecurie/ecuries.html');
 });
 
 fastify.get('/pilotes', async (request, reply) => {

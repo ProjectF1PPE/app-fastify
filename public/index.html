@@ -10,16 +10,19 @@
     <script src="//code.jquery.com/jquery-3.6.0.min.js"></script>
 
     <script src="carrousel.js"></script>
-    <script src="Includes/navbar.js"></script>
-    <script src="essential.js"></script>
+    <!--<script src="essential.js"></script>-->
 </head>
 <body>
 
+<div id="nav-placeholder"></div>
+
+<script>
+    $(() => {
+        $("#nav-placeholder").load("navbar/nav.html");
+    })
+</script>
+
 <header id="header"></header>
-<nav id="navbar"></nav>
-Pilotes
-Ecuries
-Grands Prix
 <footer id="footer"></footer>
 
 </body>
