@@ -1,6 +1,6 @@
 <?php
 // connexion à la base de données
-require '../../class/class.database.php';
+require '../../class/class.database.js.php';
 $db = Database::getInstance();
 
 // définir ma requête

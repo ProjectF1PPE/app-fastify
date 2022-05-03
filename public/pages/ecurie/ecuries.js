@@ -7,7 +7,7 @@ async function init() {
         const data = (await axios.get("/api/ecuries")).data;
         afficher(data);
     } catch(e) {
-        console.err(e);
+        throw e;
     }
 }
 

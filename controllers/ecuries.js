@@ -1,7 +1,15 @@
 let ecuries = require('../Ecuries')
 
+const mysql = require('../database');
+
 const getEcuries = (req, reply) => {
-    reply.send(ecuries)
+    const connection = mysql.DATABASE.getConnection((err, client) => {
+        client.execute('SELECT * from ecurie', (err, result) => {
+            client.release();
+            reply.send(result);
+            //reply.send(err || result);
+        });
+    });
 }
 
 const getEcurie = (req, reply) => {

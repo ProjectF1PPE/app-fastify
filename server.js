@@ -4,9 +4,8 @@ const fastify = require('fastify')({
 const path = require("path");
 const fastifyStatic = require("fastify-static");
 
-
 fastify.register(require('fastify-mysql'), {
-    //promise: true,
+    promise: true,
     connectionString: 'mysql://root:3M75B4fKWbsr@casf1_db_1:3306/f1'
 });
 
@@ -24,6 +23,12 @@ fastify.register(fastifyStatic, {
 });
 
 fastify.register(require('./routes/ecurie'));
+
+fastify.mysql.query('SELECT * from ecurie', (err, result) => {
+    client.release();
+    reply.send(result);
+    //reply.send(err || result);
+});
 
 /*
 fastify.register(fastifyStatic, {
