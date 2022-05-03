@@ -2,23 +2,13 @@
 
 window.onload = init;
 
-function init() {
-
-
-    /*
-    $.ajax({
-        url: "ajax/getlesecuries.php",
-        dataType: "json",
-        success: remplirLesDonnees,
-        error: reponse => console.log(reponse.reponseText)
-    });
-    */
-    let lesEcuries = [
-         {id: "1", nom: "Carrefour", idPays: "1", pilotes: ["1", "2"]},
-         {id: "2", nom: "Auchan", idPays: "2", pilotes: ["2", "1"]}
-    ]
-
-    afficher(lesEcuries);
+async function init() {
+    try {
+        const data = (await axios.get("/api/ecuries")).data;
+        afficher(data);
+    } catch(e) {
+        console.err(e);
+    }
 }
 
 function afficher(data) {
