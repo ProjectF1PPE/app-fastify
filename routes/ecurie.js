@@ -82,7 +82,7 @@ function ecurieRoutes(fastify, options, done) {
     fastify.post('/ecuries', postEcurieOpts)
 
     fastify.delete('/ecuries/:id', deleteEcurieOpts)
-    
+
     fastify.put('/ecuries/:id', updateEcurieOpts)
 
     done()
