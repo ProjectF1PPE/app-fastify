@@ -5,11 +5,26 @@ const path = require("path");
 const fastifyStatic = require("fastify-static");
 
 /*
+const config = require("./constant.json");
+const mysql = require('mysql2');
+
+setTimeout(() => {
+    const connection = mysql.createConnection({
+        host: config.DB_HOST,
+        user: config.DB_USER,
+        password: config.DB_PASS,
+        port: config.DB_PORT,
+        database: config.DB_DATABASE,
+        socketPath : '/tmp/mysql.sock',
+    });
+}, 1000 * 5);
+
+*/
+
 fastify.register(require('fastify-mysql'), {
-    promise: true,
-    connectionString: 'mysql://debian:3M75B4fKWbsr@localhost/mysql'
-})
- */
+    //promise: true,
+    connectionString: 'mysql://root:3M75B4fKWbsr@127.0.0.1:3306/f1'
+});
 
 fastify.register(require('fastify-swagger'), {
     exposeRoute: true,

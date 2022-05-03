@@ -1,7 +1,24 @@
-let ecuries = [
-    { id: '1', name: 'Ecurie One' },
-    { id: '2', name: 'Ecurie Two' },
-    { id: '3', name: 'Ecurie Three' },
-]
+let mysql = require('server')
 
-module.exports = ecuries
+function ecuries() {
+    return [
+        {
+            id: '1',
+            nom: 'Mercedes',
+            pilotes: [
+                {id: '1', nom: 'Gasly', prenom: 'Pierre'},
+                {id: '2', nom: 'Eeeee', prenom: ''},
+            ]
+        },
+        {
+            id: '2',
+            nom: 'Mercedes',
+            pilotes: [
+                {id: '1', nom: 'Gasly', prenom: 'Pierre'},
+                {id: '2', nom: 'Eeeee', prenom: ''},
+            ]
+        },
+    ];
+}
+
+module.exports = ecuries();
