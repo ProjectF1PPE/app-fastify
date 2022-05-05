@@ -1,18 +1,11 @@
 const mysql = require("mysql2/promise");
 
+const database = require('../database');
+
 const getEcuries = async (req, reply) => {
-    const connection = await mysql.createConnection({
-        host: 'casf1_db_1',
-        user: 'root',
-        password: '3M75B4fKWbsr',
-        database: 'f1'
-    });
-
-    connection.connect();
-
-    const [ecuries, ecuriesFields] = await connection.query('SELECT id, nom, photo, idPays from ecurie');
-    const [pilotes, pilotesFields] = await connection.query('SELECT id, nom, prenom, ordre, idEcurie from pilote');
-    const [pays, paysFields] = await connection.query('SELECT id, nom from pays');
+    const [ecuries, ecuriesFields] = await database().query('SELECT id, nom, photo, idPays from ecurie');
+    const [pilotes, pilotesFields] = await database().query('SELECT id, nom, prenom, ordre, idEcurie from pilote');
+    const [pays, paysFields] = await database().query('SELECT id, nom from pays');
 
     let result = [];
 
@@ -44,7 +37,6 @@ const getEcuries = async (req, reply) => {
     }
 
     reply.send(result);
-    connection.end();
 }
 
 const getEcurie = async (req, reply) => {
