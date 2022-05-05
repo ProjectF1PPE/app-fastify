@@ -4,10 +4,15 @@ const fastify = require('fastify')({
 const path = require("path");
 const fastifyStatic = require("fastify-static");
 
+const mysql = require('mysql2');
+
+/*
 fastify.register(require('fastify-mysql'), {
     promise: true,
     connectionString: 'mysql://root:3M75B4fKWbsr@casf1_db_1:3306/f1'
 });
+
+ */
 
 fastify.register(require('fastify-swagger'), {
     exposeRoute: true,
@@ -23,7 +28,9 @@ fastify.register(fastifyStatic, {
 });
 
 fastify.register(require('./routes/ecurie'));
+fastify.register(require('./routes/gp'));
 
+/*
 fastify.mysql.query('SELECT * from ecurie', (err, result) => {
     client.release();
     reply.send(result);
@@ -85,6 +92,10 @@ fastify.register(fastifyStatic, {
 });
  */
 
+fastify.get('/insomnia', async (request, reply) => {
+    reply.sendFile('insomnia.json');
+});
+
 fastify.get('/', async (request, reply) => {
     reply.sendFile('index.html');
 });
@@ -115,15 +126,7 @@ fastify.get('/ecurie', async (request, reply) => {
     connection.release()
     return rows[0]
 });
-
  */
-
-fastify.get('/pilote', async (request, reply) => {
-    const connection = await fastify.mysql.getConnection()
-    const [rows] = await connection.query('Select id, nom, prenom, ordre from pilote order by id')
-    connection.release()
-    return rows[0]
-});
 
 const start = async () => {
     try {

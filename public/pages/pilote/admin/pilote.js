@@ -2,14 +2,27 @@
 
 window.onload = init;
 
-async function init() {
-    try {
-        const data = (await axios.get("/api/pilotes")).data;
-        afficher(data);
-    } catch(e) {
-        throw e;
-    }
+function init() {
 
+    // A METTRE QUAND SQL MARCHERA
+    $.ajax({
+        url: "ajax/getlespilotes.php",
+        type: 'post',
+        dataType: "json",
+        success: afficher,
+        error: reponse => console.log(reponse.responseText)
+    });
+
+
+    /*
+    // EN ATTENDANT POUR FAIRE DES TESTS
+    let lesPilotes = [
+        {id: "77", nom: "Bottas", prenom: "Valtteri", description: 'Super pilote'},
+        {id: "22", nom: "Tsunoda", prenom: "Yuki", description: 'Magnifique pilote'}
+    ]
+    afficher(lesPilotes)
+
+     */
     $('#haut').slideUp(3000);
 }
 
@@ -55,5 +68,4 @@ function afficher(data) {
     }
 
 }
-
 

@@ -2,27 +2,13 @@
 
 window.onload = init;
 
-function init() {
-    /*
-    // A METTRE QUAND SQL MARCHERA
-    $.ajax({
-        url: "ajax/getlespilotes.php",
-        type: 'post',
-        dataType: "json",
-        success: afficher,
-        error: reponse => console.log(reponse.responseText)
-    });
-     */
-
-    // EN ATTENDANT POUR FAIRE DES TESTS
-    let lesGrandsPrix = [
-        {ville: "Austin",  date: '23-10-2022', photo:'Autin', idPays:'us'},
-        {ville: "Bakou",  date: '12-06-2022', photo:'Bakou', idPays:'az'},
-        {ville: "Barcelone",  date: '12-06-2022', photo:'Barcelone', idPays:'bc'},
-        {ville: "Budapest",  date: '12-06-2022', photo:'Budapest', idPays:'az'},
-        {ville: "Hockenheim",  date: '12-06-2022', photo:'Hockenheim', idPays:'az'},
-        {ville: "Imola",  date: '12-06-2022', photo:'Imola', idPays:'az'},
-    ]
+async function init() {
+    try {
+        const data = (await axios.get("/api/gp")).data;
+        afficher(data);
+    } catch(e) {
+        throw e;
+    }
 
     afficher(lesGrandsPrix)
 }

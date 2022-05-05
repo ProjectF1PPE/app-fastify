@@ -1,15 +1,28 @@
-let ecuries = require('../Ecuries')
-
-const mysql = require('../database');
+const mysql = require("mysql2");
 
 const getEcuries = (req, reply) => {
-    const connection = mysql.DATABASE.getConnection((err, client) => {
-        client.execute('SELECT * from ecurie', (err, result) => {
-            client.release();
-            reply.send(result);
-            //reply.send(err || result);
-        });
-    });
+    const connection = mysql.createConnection({
+        host: 'casf1_db_1',
+        user: 'root',
+        password: '3M75B4fKWbsr',
+        database: 'f1'
+    })
+
+    connection.connect();
+
+    connection.query('SELECT * from ecurie', (err, res, fields) => {
+        /*if (err) {
+            throw err;
+        }
+
+         */
+        reply.send(res);
+        console.log('err: ' + err);
+        console.log('results: ' + res);
+        console.log('fetched: ' + fields);
+    })
+
+    connection.end();
 }
 
 const getEcurie = (req, reply) => {

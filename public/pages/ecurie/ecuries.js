@@ -9,6 +9,8 @@ async function init() {
     } catch(e) {
         throw e;
     }
+
+    $('#haut').slideUp(3000);
 }
 
 function afficher(data) {
