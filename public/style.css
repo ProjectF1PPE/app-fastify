@@ -1,5 +1,6 @@
 @import url('https://fonts.googleapis.com/css2?family=Josefin+Sans&display=swap');
 @import url('https://fonts.googleapis.com/css?family=Lobster');
+
 .logo {
     width : 150px;
     padding-left:50px;
@@ -156,29 +157,20 @@ body {
     background-repeat: no-repeat;
     background-size: 100% 100%;
     background-attachment: fixed;
-    margin-top:10%;
 }
+.row {
+    background-color:dimgrey;
+    border-radius: 2%;
+}
+.img1 {
+    width:100%;
+    height: auto;
+    max-width: 100%;
 
-
-footer {
-    color: white;
-    margin-left:45%;
-}
-.mobile{
-    display:none;
-}
-.pc {
-    display:block;
 }
 @media screen and (max-width: 767px) {
-    .mobile {
-        display:block;
-    }
-    .pc {
-        display:none;
-    }
-    footer{
-        margin-left:15%;
+    .ecuries{
+        margin-top:80px;
     }
     .admin{
 
@@ -191,7 +183,6 @@ footer {
         display:none;
     }
 }
-
 @media screen and (min-width: 767px) {
     .banner {
         padding: 0 150px;

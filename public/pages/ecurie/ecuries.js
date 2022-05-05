@@ -30,11 +30,6 @@ function afficher(data) {
         tr.insertCell(1).appendChild(img)
 
         let nomPays = "Pays non trouvÃ©"
-        for (let unPays of lesPays) {
-            if (unPays.id === ecurie.idPays) {
-                nomPays = unPays.nom
-            }
-        }
 
         tr.insertCell(2).innerText = nomPays
 
