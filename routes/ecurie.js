@@ -9,8 +9,10 @@ const {
 const Ecurie = {
     type: 'object',
     properties: {
-        id: { type: 'string' },
-        name: { type: 'string' },
+        id: { type: 'number' },
+        nom: { type: 'string' },
+        photo: { type: 'string' },
+        idPays: { type: 'string' },
     },
 }
 
@@ -18,8 +20,7 @@ const getEcuriesOpts = {
     schema: {
         response: {
             200: {
-                type: 'array',
-                ecuries: Ecurie,
+                type: 'array'
             },
         },
     },

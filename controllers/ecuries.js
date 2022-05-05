@@ -3,9 +3,16 @@ const mysql = require("mysql2/promise");
 const database = require('../database');
 
 const getEcuries = async (req, reply) => {
-    const [ecuries, ecuriesFields] = await database().query('SELECT id, nom, photo, idPays from ecurie');
-    const [pilotes, pilotesFields] = await database().query('SELECT id, nom, prenom, ordre, idEcurie from pilote');
-    const [pays, paysFields] = await database().query('SELECT id, nom from pays');
+    const connection = await mysql.createConnection({
+        host: 'casf1_db_1',
+        user: 'root',
+        password: '3M75B4fKWbsr',
+        database: 'f1'
+    });
+
+    const [ecuries, ecuriesFields] = await connection.query('SELECT id, nom, photo, idPays from ecurie');
+    const [pilotes, pilotesFields] = await connection.query('SELECT id, nom, prenom, ordre, idEcurie from pilote');
+    const [pays, paysFields] = await connection.query('SELECT id, nom from pays');
 
     let result = [];
 
@@ -51,12 +58,10 @@ const getEcurie = async (req, reply) => {
 
     connection.connect();
 
-    connection.query('SELECT id, nom, photo, idPays FROM ecurie where id = ?', [id], (err, res, fields) => {
-        console.log(err);
-        console.log(res);
-        console.log(fields);
-        reply.send(res);
-    });
+    const [ecurie, fields] = await connection.query('SELECT id, nom, photo, idPays FROM ecurie where id = ?', [id]);
+    reply.send(...ecurie);
+
+    console.log(...ecurie);
 
     connection.end();
 }

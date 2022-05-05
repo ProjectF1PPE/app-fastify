@@ -19,6 +19,7 @@
     "fastify-mysql": "^2.1.0",
     "fastify-static": "^4.6.1",
     "fastify-swagger": "^5.1.0",
+    "fluent-json-schema": "^3.1.0",
     "jsonwebtoken": "^8.5.1",
     "lodash": "^4.17.21",
     "mysql": "^2.18.1",
