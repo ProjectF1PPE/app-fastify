@@ -1,17 +1,9 @@
-const pool = require('../database');
+const pool = require('../../database');
 
-const getResultatsPilotes = async (req, reply) => {
-    req.params
-
+const getEcuries = async (req, reply) => {
     const [ecuries, ecuriesFields] = await pool.query('SELECT id, nom, photo, idPays from ecurie');
     const [pilotes, pilotesFields] = await pool.query('SELECT id, nom, prenom, ordre, idEcurie from pilote');
     const [pays, paysFields] = await pool.query('SELECT id, nom from pays');
-
-    // place
-    // idPilote
-    // nom+prenom pilote
-    // id pays
-    // points
 
     let result = [];
 

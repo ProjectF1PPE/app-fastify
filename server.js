@@ -30,6 +30,10 @@ fastify.register(fastifyStatic, {
 fastify.register(require('./routes/ecurie'));
 fastify.register(require('./routes/gp'));
 fastify.register(require('./routes/pilote'));
+fastify.register(require('./routes/pays'));
+fastify.register(require('./routes/resultats/gp'));
+fastify.register(require('./routes/resultats/pilote'));
+fastify.register(require('./routes/resultats/admin/resultat'));
 
 /*
 fastify.mysql.query('SELECT * from ecurie', (err, result) => {
@@ -119,7 +123,6 @@ fastify.get('/pilotes', async (request, reply) => {
 fastify.get('/gp', async (request, reply) => {
     reply.sendFile('pages/gp/gp.html');
 });
-
 
 fastify.get('/admin/ecurie', async (request, reply) => {
     reply.sendFile('pages/ecurie/admin/ecurieAdmin.html');

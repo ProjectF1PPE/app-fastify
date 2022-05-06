@@ -1,17 +1,9 @@
-const pool = require('../database');
+const pool = require('../../../database');
 
-const getResultatsPilotes = async (req, reply) => {
-    req.params
-
+const getEcuries = async (req, reply) => {
     const [ecuries, ecuriesFields] = await pool.query('SELECT id, nom, photo, idPays from ecurie');
     const [pilotes, pilotesFields] = await pool.query('SELECT id, nom, prenom, ordre, idEcurie from pilote');
     const [pays, paysFields] = await pool.query('SELECT id, nom from pays');
-
-    // place
-    // idPilote
-    // nom+prenom pilote
-    // id pays
-    // points
 
     let result = [];
 
@@ -51,16 +43,40 @@ const getEcurie = async (req, reply) => {
     reply.send(...ecurie);
 }
 
-const addEcurie = (req, reply) => {
-    const { name } = req.body
-    const ecurie = {
-        id: '1',
-        name,
+const addResultat = async (req, reply) => {
+    const { gp, bonus, classement } = req.body;
+
+    const bareme = [25, 18, 15, 12, 10, 8, 6, 4, 2, 1, 0];
+
+    /*
+    const result = {
+        gp: '2',
+        bonus: idPilote or null
+        classement: [
+            {
+                id: "22",
+                place: 2
+            }
+        ]
+    }
+     */
+
+    for (let pilote of classement) {
+        let points;
+        if (pilote.place > 10 || pilote.place === -1) {
+            points = 0;
+        } else {
+            points = bareme[pilote.place - 1];
+        }
+
+        if (bonus != null && bonus === pilote.id) {
+            points++;
+        }
+
+        await pool.query("INSERT into resultat(idPilote, idGP, place, point) values (?, ?, ?, ?)", [pilote.id, gp, pilote.place, points]);
     }
 
-    ecuries = [...ecuries, ecurie]
-
-    reply.code(201).send(ecurie)
+    reply.code(204);
 }
 
 const deleteEcurie = async (req, reply) => {
@@ -86,7 +102,7 @@ const updateEcurie = (req, reply) => {
 module.exports = {
     getEcuries,
     getEcurie,
-    addEcurie,
+    addResultat,
     deleteEcurie,
     updateEcurie,
 }
