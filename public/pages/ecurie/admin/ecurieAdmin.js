@@ -12,13 +12,14 @@ async function init() {
     } catch(e) {
         throw e;
     }
+
     try {
-        const data = (await axios.get("/api/admin/ecurie")).data;
+        const data = (await axios.get("/api/ecuries")).data;
         remplirLesEcuries(data);
     } catch(e) {
         throw e;
     }
-};
+}
 
 function remplirLesPays(data) {
     let idPays = document.getElementById('idPays');
@@ -32,6 +33,7 @@ function remplirLesEcuries(data) {
     for (const ecurie of data) {
         let tr = document.getElementById("lesLignes").insertRow();
 
+        tr.insertCell().innerText = ecurie.id
         tr.insertCell().innerText = ecurie.nom
 
         let img = new Image()
