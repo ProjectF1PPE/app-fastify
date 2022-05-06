@@ -1,7 +1,0 @@
-{
-  "DB_HOST": "0.0.0.0",
-  "DB_USER": "debian",
-  "DB_PASS": "",
-  "DB_PORT": "3306",
-  "DB_DATABASE": "f1"
-}
