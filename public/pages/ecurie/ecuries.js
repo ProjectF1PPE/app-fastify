@@ -16,36 +16,26 @@ async function init() {
 function afficher(data) {
     console.log(data)
 
-    for (const ecurie of data) {
+    for (let ecurie of data) {
         let tr = document.getElementById("lesLignes").insertRow();
 
-        tr.insertCell(0).innerText = ecurie.nom
+        tr.insertCell().innerText = ecurie.nom
 
         let img = new Image()
-        img.src = "img/" + ecurie.id + ".png"
+        img.src = "/pages/ecurie/img/" + ecurie.id + ".png"
         img.onerror = () => {
-            img.src = "img/default.png"
+            img.src = "/pages/ecurie/img/default.png"
         }
+        tr.insertCell().appendChild(img);
 
-        tr.insertCell(1).appendChild(img)
+        tr.insertCell().innerText = ecurie.nomPays;
 
-        let nomPays = "Pays non trouvÃ©"
+        ecurie.pilotes.sort((piloteA, piloteB) => {
+            return piloteA.ordre - piloteB.ordre
+        });
 
-        tr.insertCell(2).innerText = nomPays
-
-        let pilotes = []
-        for (let unPilote of lesPilotes) {
-            if (unPilote.idEcurie === ecurie.id) {
-                pilotes.push({
-                    nom: unPilote.nom,
-                    prenom: unPilote.prenom,
-                    ordre: unPilote.ordre
-                })
-            }
-        }
-
-        for (let pilote of pilotes) {
-            tr.insertCell().innerText = "#" + pilote.ordre + " - " + pilote.nom + " " + pilote.prenom
+        for (let pilote of ecurie.pilotes) {
+            tr.insertCell().innerText = pilote.nom;
         }
     }
 }
