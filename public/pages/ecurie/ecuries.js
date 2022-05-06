@@ -3,6 +3,8 @@
 window.onload = init;
 
 async function init() {
+    console.log('init');
+
     try {
         const data = (await axios.get("/api/ecuries")).data;
         afficher(data);
