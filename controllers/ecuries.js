@@ -1,18 +1,9 @@
-const mysql = require("mysql2/promise");
-
-const database = require('../database');
+const pool = require('../database');
 
 const getEcuries = async (req, reply) => {
-    const connection = await mysql.createConnection({
-        host: 'casf1_db_1',
-        user: 'root',
-        password: '3M75B4fKWbsr',
-        database: 'f1'
-    });
-
-    const [ecuries, ecuriesFields] = await connection.query('SELECT id, nom, photo, idPays from ecurie');
-    const [pilotes, pilotesFields] = await connection.query('SELECT id, nom, prenom, ordre, idEcurie from pilote');
-    const [pays, paysFields] = await connection.query('SELECT id, nom from pays');
+    const [ecuries, ecuriesFields] = await pool.query('SELECT id, nom, photo, idPays from ecurie');
+    const [pilotes, pilotesFields] = await pool.query('SELECT id, nom, prenom, ordre, idEcurie from pilote');
+    const [pays, paysFields] = await pool.query('SELECT id, nom from pays');
 
     let result = [];
 
@@ -48,22 +39,8 @@ const getEcuries = async (req, reply) => {
 
 const getEcurie = async (req, reply) => {
     const { id } = req.params
-
-    const connection = await mysql.createConnection({
-        host: 'casf1_db_1',
-        user: 'root',
-        password: '3M75B4fKWbsr',
-        database: 'f1'
-    });
-
-    connection.connect();
-
-    const [ecurie, fields] = await connection.query('SELECT id, nom, photo, idPays FROM ecurie where id = ?', [id]);
+    const [ecurie, fields] = await pool.query('SELECT id, nom, photo, idPays FROM ecurie where id = ?', [id]);
     reply.send(...ecurie);
-
-    console.log(...ecurie);
-
-    connection.end();
 }
 
 const addEcurie = (req, reply) => {
@@ -81,22 +58,10 @@ const addEcurie = (req, reply) => {
 const deleteEcurie = async (req, reply) => {
     const { id } = req.params
 
-    const connection = await mysql.createConnection({
-        host: 'casf1_db_1',
-        user: 'root',
-        password: '3M75B4fKWbsr',
-        database: 'f1'
+    const [rows, fields] = await pool.query("DELETE FROM ecurie where id = ?", [id]);
+    reply.send({
+        message: "L'ecurie " + id + " a été supprimé."
     });
-
-    connection.connect();
-
-    connection.query('DELETE FROM ecurie where id = ?', [id], (err, res, fields) => {
-        reply.send({
-            message: "L'ecurie " + id + " a été supprimé."
-        });
-    });
-
-    connection.end();
 }
 
 const updateEcurie = (req, reply) => {
