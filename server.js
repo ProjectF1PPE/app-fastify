@@ -30,8 +30,10 @@ fastify.register(fastifyStatic, {
 fastify.register(require('./routes/ecurie'));
 fastify.register(require('./routes/gp'));
 fastify.register(require('./routes/pilote'));
+fastify.register(require('./routes/pays'));
 fastify.register(require('./routes/resultats/gp'));
 fastify.register(require('./routes/resultats/pilote'));
+fastify.register(require('./routes/resultats/admin/resultat'));
 
 /*
 fastify.mysql.query('SELECT * from ecurie', (err, result) => {

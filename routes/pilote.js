@@ -15,7 +15,7 @@ const getPilotesOpts = {
         response: {
             200: {
                 type: 'array',
-                pilotes: Pilote,
+                items: Pilote,
             },
         },
     },
