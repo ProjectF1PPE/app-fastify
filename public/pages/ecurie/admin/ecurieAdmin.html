@@ -15,7 +15,7 @@
     <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/noty/3.1.4/noty.min.css">
     <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/animate.css/3.5.1/animate.min.css ">
 
-    <link rel="stylesheet" href="../style.css">
+    <link rel="stylesheet" href="../../ecurie/admin/style.css">
 
     <script src="ecurieAdmin.js"></script>
 </head>
@@ -54,6 +54,30 @@
             </div>
         </div>
     </main>
+</div>
+<div class="ecuries">
+    <div class="row">
+        <div>
+            <div class='table-responsive'>
+                <table id='lesEcuries' class='table table-hover table-borderless table-sm'>
+                    <thead>
+                    <tr>
+                        <th style='width:15%'>Id</th>
+                        <th style='width:15%'>Nom</th>
+                        <th class="photoecurie">Photo</th>
+                        <th style='width:15%'>Pays</th>
+                        <th style='width:15%'>Pilote 1</th>
+                        <th style='width:15%'>Pilote 2</th>
+                        <th style='width:15%'>Pilote 3</th>
+                        <th><i id="modif" class="bi bi-pencil-square"></i></th>
+                        <th><i id="supp" class="bi bi-backspace-fill"></i></th>
+                    </tr>
+                    </thead>
+                    <tbody id="lesLignes"></tbody>
+                </table>
+            </div>
+        </div>
+    </div>
 </div>
 </body>
 </html>

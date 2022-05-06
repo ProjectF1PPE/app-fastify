@@ -1,13 +1,13 @@
 "use strict";
 
-let lesPays
-let lesPilotes
+let lesPays = [];
 
 window.onload = init;
 
 async function init() {
     try {
         const data = (await axios.get("/api/pays")).data;
+        lesPays = data;
         remplirLesPays(data);
     } catch(e) {
         throw e;
@@ -47,8 +47,7 @@ function afficher(data) {
 
     for (const ecurie of data) {
 
-        // Nom ecurie , photo , pays
-
+        // id , nom , photo , pays , pilote 1 , pilote 2 , pilote 3
 
         let tr = document.getElementById("lesLignes").insertRow();
 
