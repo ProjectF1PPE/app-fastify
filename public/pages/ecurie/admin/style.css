@@ -14,7 +14,6 @@
     padding-right: 5%;
 }
 body {
-    background:linear-gradient(to bottom, black 80%, red);
     font-family: 'Josefin Sans', sans-serif;
     list-style-type: none;
     background-repeat: no-repeat;
@@ -22,7 +21,7 @@ body {
     background-attachment: fixed;
 }
 .row {
-    background-color:dimgrey;
+    background-color:red;
     border-radius: 2%;
 }
 .ecuries{
@@ -61,5 +60,4 @@ body {
         display:none;
     }
 }
-
 

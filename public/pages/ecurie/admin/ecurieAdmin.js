@@ -21,8 +21,10 @@ async function init() {
 }
 
 function remplirLesPays(data) {
+    let idPays = document.getElementById('idPays');
+
     for (const pays of data) {
-        let nom = pays.nom;
+        idPays.appendChild(new Option(pays.nom, pays.id));
     }
 }
 
@@ -45,44 +47,26 @@ function remplirLesEcuries(data) {
 function afficher(data) {
     console.log(data)
 
-    for (const ecurie of data) {
-
-        // id , nom , photo , pays , pilote 1 , pilote 2 , pilote 3
-
+    for (let ecurie of data) {
         let tr = document.getElementById("lesLignes").insertRow();
 
-        tr.insertCell(0).innerText = ecurie.nom
+        tr.insertCell().innerText = ecurie.nom
 
         let img = new Image()
-        img.src = "img/" + ecurie.id + ".png"
+        img.src = "../pages/ecurie/admin/img/" + ecurie.id + ".png"
         img.onerror = () => {
-            img.src = "img/default.png"
+            img.src = "../pages/ecurie/admin/img/default.png"
         }
+        tr.insertCell().appendChild(img);
 
-        tr.insertCell(1).appendChild(img)
+        tr.insertCell().innerText = ecurie.nomPays;
 
-        let nomPays = "Pays non trouvé"
-        for (let unPays of lesPays) {
-            if (unPays.id === ecurie.idPays) {
-                nomPays = unPays.nom
-            }
-        }
+        ecurie.pilotes.sort((piloteA, piloteB) => {
+            return piloteA.ordre - piloteB.ordre
+        });
 
-        tr.insertCell(2).innerText = nomPays
-
-        let pilotes = []
-        for (let unPilote of lesPilotes) {
-            if (unPilote.idEcurie === ecurie.id) {
-                pilotes.push({
-                    nom: unPilote.nom,
-                    prenom: unPilote.prenom,
-                    ordre: unPilote.ordre
-                })
-            }
-        }
-
-        for (let pilote of pilotes) {
-            tr.insertCell().innerText = "#" + pilote.ordre + " - " + pilote.nom + " " + pilote.prenom
+        for (let pilote of ecurie.pilotes) {
+            tr.insertCell().innerText = pilote.nom;
         }
     }
 }
