@@ -14,11 +14,11 @@ async function init() {
     }
     try {
         const data = (await axios.get("/api/admin/ecurie")).data;
-        remplirLesPays(data);
+        remplirLesEcuries(data);
     } catch(e) {
         throw e;
     }
-}
+};
 
 function remplirLesPays(data) {
     let idPays = document.getElementById('idPays');
@@ -32,30 +32,12 @@ function remplirLesEcuries(data) {
     for (const ecurie of data) {
         let tr = document.getElementById("lesLignes").insertRow();
 
-        tr.insertCell(0).innerText = ecurie.nom
-
-        let img = new Image()
-        img.src = "img/" + ecurie.id + ".png"
-        img.onerror = () => {
-            img.src = "img/default.png"
-        }
-        tr.insertCell(1).appendChild(img)
-    }
-}
-
-// affichage des données retournées
-function afficher(data) {
-    console.log(data)
-
-    for (let ecurie of data) {
-        let tr = document.getElementById("lesLignes").insertRow();
-
         tr.insertCell().innerText = ecurie.nom
 
         let img = new Image()
-        img.src = "../pages/ecurie/admin/img/" + ecurie.id + ".png"
+        img.src = "/pages/ecurie/admin/img/" + ecurie.id + ".png"
         img.onerror = () => {
-            img.src = "../pages/ecurie/admin/img/default.png"
+            img.src = "/pages/ecurie/admin/img/default.png"
         }
         tr.insertCell().appendChild(img);
 
@@ -70,6 +52,7 @@ function afficher(data) {
         }
     }
 }
+
 
 function ajouter() {
     // contrôle des champs de saisie
