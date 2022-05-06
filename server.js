@@ -120,6 +120,11 @@ fastify.get('/gp', async (request, reply) => {
     reply.sendFile('pages/gp/gp.html');
 });
 
+
+fastify.get('/admin/ecurie', async (request, reply) => {
+    reply.sendFile('pages/ecurie/admin/ecurieAdmin.html');
+});
+
 /*
 fastify.get('/ecurie', async (request, reply) => {
     const connection = await fastify.mysql.getConnection()
