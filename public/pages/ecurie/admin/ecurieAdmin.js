@@ -7,21 +7,38 @@ window.onload = init;
 
 async function init() {
     try {
-        const data = (await axios.get("/api/ecuries")).data;
-        remplirLesDonnees(data);
+        const data = (await axios.get("/api/pays")).data;
+        remplirLesPays(data);
+    } catch(e) {
+        throw e;
+    }
+    try {
+        const data = (await axios.get("/api/admin/ecurie")).data;
+        remplirLesPays(data);
     } catch(e) {
         throw e;
     }
 }
 
-function remplirLesDonnees(data) {
-    lesPays = data.lesPays
-    lesPilotes = data.lesPilotes
-    afficher(data.lesEcuries)
+function remplirLesPays(data) {
+    for (const pays of data) {
+        let nom = pays.nom;
+    }
+}
 
-    console.log(lesPays)
-    console.log(lesPilotes)
-    console.log(data.lesEcuries)
+function remplirLesEcuries(data) {
+    for (const ecurie of data) {
+        let tr = document.getElementById("lesLignes").insertRow();
+
+        tr.insertCell(0).innerText = ecurie.nom
+
+        let img = new Image()
+        img.src = "img/" + ecurie.id + ".png"
+        img.onerror = () => {
+            img.src = "img/default.png"
+        }
+        tr.insertCell(1).appendChild(img)
+    }
 }
 
 // affichage des données retournées
@@ -29,6 +46,10 @@ function afficher(data) {
     console.log(data)
 
     for (const ecurie of data) {
+
+        // Nom ecurie , photo , pays
+
+
         let tr = document.getElementById("lesLignes").insertRow();
 
         tr.insertCell(0).innerText = ecurie.nom

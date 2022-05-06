@@ -27,7 +27,7 @@ $idPays = trim($_POST['idPays']);
 
 // Contrôle des données
 
-require '../../class/class.database.php';
+require '../class/class.database.php';
 $db = Database::getInstance();
 
 // contrôle du nom
