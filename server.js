@@ -27,7 +27,8 @@ fastify.register(fastifyStatic, {
     prefix: '/',
 });
 
-fastify.register(require('./routes/ecurie'));
+fastify.register(require('./routes/ecurie/ecurie'));
+fastify.register(require('./routes/ecurie/admin/adminEcurie'));
 fastify.register(require('./routes/gp'));
 fastify.register(require('./routes/pilote'));
 fastify.register(require('./routes/pays'));
