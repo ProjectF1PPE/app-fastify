@@ -25,6 +25,8 @@ fastify.register(require('./routes/pays'));
 fastify.register(require('./routes/resultats/gp'));
 fastify.register(require('./routes/resultats/pilote'));
 fastify.register(require('./routes/resultats/admin/resultat'));
+fastify.register(require('./routes/loginAdmin'));
+
 
 fastify.get('/insomnia', async (request, reply) => {
     reply.sendFile('insomnia.json');

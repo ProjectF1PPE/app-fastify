@@ -1,5 +1,5 @@
 const {
-    getEcuries,
+    getEcuries, postEcurie,
 } = require('../../../controllers/ecurie/admin/ecuriesAdmin')
 
 const Ecurie = {
@@ -23,8 +23,20 @@ const getEcuriesOpts = {
     handler: getEcuries,
 }
 
+const postEcurieOpts = {
+    schema: {
+        response: {
+            200: {
+                type: 'array'
+            },
+        },
+    },
+    handler: postEcurie,
+}
+
 function adminEcuriesRoutes(fastify, options, done) {
     fastify.get('/api/admin/ecuries', getEcuriesOpts)
+    fastify.post('/api/admin/ecurie', postEcurieOpts)
 
     done()
 }

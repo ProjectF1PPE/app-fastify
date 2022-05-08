@@ -37,6 +37,25 @@ const getEcuries = async (req, reply) => {
     reply.send(result);
 }
 
+const postEcurie = async (req, reply) => {
+    const body = req.body;
+    console.log(body);
+
+    const [rows, fields] = await pool.query('INSERT INTO ecurie(nom, photo, idPays) values(?, ?, ?)', [body.nom, body.photo, body.idPays]);
+
+    reply.code(204);
+}
+
+const putEcurie = async (req, reply) => {
+    const body = req.body;
+    console.log(body);
+
+    const [rows, fields] = await pool.query('INSERT INTO ecurie(nom, photo, idPays) values(?, ?, ?)', [body.nom, body.photo, body.idPays]);
+
+    reply.code(204);
+}
+
 module.exports = {
-    getEcuries
+    getEcuries,
+    postEcurie
 }
