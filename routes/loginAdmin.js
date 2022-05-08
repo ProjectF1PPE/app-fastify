@@ -2,7 +2,10 @@ const {
     loginAdmin,
 } = require('../controllers/loginAdmin')
 
+const S = require('fluent-json-schema');
+
 const loginAdminOpts = {
+    schema: S.object().prop('password', S.string()),
     handler: loginAdmin,
 }
 
