@@ -12,6 +12,8 @@ fastify.register(require('fastify-swagger'), {
     }
 });
 
+fastify.register(require('@fastify/sensible'));
+
 fastify.register(fastifyStatic, {
     root: path.join(__dirname, 'public'),
     prefix: '/',

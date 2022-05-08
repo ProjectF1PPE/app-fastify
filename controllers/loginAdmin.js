@@ -21,13 +21,7 @@ const loginAdmin = async (req, reply) => {
             options.expiresIn = "3h";
         }
 
-        reply.send({
-            token: jwt.sign({}, {
-                secret: "yes",
-                algorithms: ['HS256']
-            }, options),
-            authorized: true
-        });
+        reply.send(jwt.sign({}, adminpassword, options));
     } else {
         reply.badRequest('Wrong password');
     }
