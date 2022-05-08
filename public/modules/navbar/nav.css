@@ -158,16 +158,6 @@ body {
     background-size: 100% 100%;
     background-attachment: fixed;
 }
-.row {
-    background-color:dimgrey;
-    border-radius: 2%;
-}
-.img1 {
-    width:100%;
-    height: auto;
-    max-width: 100%;
-
-}
 @media screen and (max-width: 767px) {
     .admin{
 

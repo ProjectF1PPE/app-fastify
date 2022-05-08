@@ -9,8 +9,7 @@ async function init() {
     } catch(e) {
         throw e;
     }
-
-    afficher(lesGrandsPrix)
+    $('#haut').slideUp(3000);
 }
 
 function afficher(data) {
@@ -22,7 +21,7 @@ function afficher(data) {
     for (const grandprix of data) {
         let col = document.createElement('div');
         col.classList.add("col-xl-3", "col-lg-4", "col-md-6", "col-12");
-
+        col.style.padding = "10px";
         let carte = document.createElement('div');
         carte.classList.add('card');
 
@@ -51,6 +50,6 @@ function afficher(data) {
         col.appendChild(carte);
         row.appendChild(col);
 
-        lesCartes.appendChild(row);
+        lesGP.appendChild(row);
     }
 }

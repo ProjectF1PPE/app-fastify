@@ -38,7 +38,7 @@ function afficher(data) {
         // img
         tr.insertCell().innerText = element.img;
         // element.nom = nom + prenom
-        tr.insertCell().innerText = element.nom;
+        tr.insertCell().innerText = element.nom + element.prenom;
         // id pays
         tr.insertCell().innerText = element.idPays;
         // point

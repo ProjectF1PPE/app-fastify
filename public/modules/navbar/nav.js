@@ -30,4 +30,5 @@ jQuery(function ($) {
     $(window).on('resize', adjustNav);
 
     adjustNav();
+
 });
