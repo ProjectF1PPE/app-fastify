@@ -30,7 +30,7 @@ const getPilotesOpts = {
 }
 
 function piloteRoutes(fastify, options, done) {
-    fastify.get('/api/resultats/pilotes/:gp', getPilotesOpts)
+    fastify.get('/api/resultats/pilotes/?gp=', getPilotesOpts)
 
     done()
 }
