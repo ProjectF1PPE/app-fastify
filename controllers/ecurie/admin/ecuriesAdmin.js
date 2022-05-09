@@ -50,7 +50,7 @@ const putEcurie = async (req, reply) => {
     const body = req.body;
     console.log(body);
 
-    const [rows, fields] = await pool.query('INSERT INTO ecurie(nom, photo, idPays) values(?, ?, ?)', [body.nom, body.photo, body.idPays]);
+    const [rows, fields] = await pool.query('INSERT INTO ecurie(nom, idPays) values(?, ?)', [body.nom, body.idPays]);
 
     reply.code(204);
 }
