@@ -1,5 +1,7 @@
 "use strict";
 
+let id = 'fr';
+
 let lesPays = [];
 
 window.onload = init;
@@ -19,6 +21,37 @@ async function init() {
     } catch(e) {
         throw e;
     }
+
+    btnAjouter.onclick = async () => {
+        console.log("zdzdz");
+        console.log(nom.value);
+        console.log(id);
+
+        if (id === undefined) {
+            return;
+        }
+
+        try {
+            const res = (await axios.post("/api/admin/ecurie", {
+                nom: nom.value,
+                idPays: id
+            }));
+
+            if (res.status === 204) {
+                // montrer que c'est bien ajouté
+
+                id = undefined;
+                nom.innerText = "";
+
+                console.log('bien ajouté');
+            } else {
+                // montrer qu'il y a eu une erreur
+                console.log("erreur !");
+            }
+        } catch(e) {
+            throw e;
+        }
+    }
 }
 
 function remplirLesPays(data) {
@@ -26,6 +59,9 @@ function remplirLesPays(data) {
 
     for (const pays of data) {
         idPays.appendChild(new Option(pays.nom, pays.id));
+        idPays.addEventListener('change', (ev) => {
+            id = ev.target.value;
+        });
     }
 }
 

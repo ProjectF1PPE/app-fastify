@@ -17,8 +17,6 @@ function remplirLesGrandsPrix(data) {
     for (const gp of data) {
         selectGp.appendChild(new Option(gp.nom, gp.id));
 
-        console.log(gp.id);
-
         selectGp.onchange = async () => {
             try {
                 const data = (await axios.get("/api/resultats/pilotes/", { params: { gp: gp.id }}));
