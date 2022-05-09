@@ -51,7 +51,11 @@ fastify.get('/gp', async (request, reply) => {
 });
 
 fastify.get('/classement/pilotes', async (request, reply) => {
-    reply.sendFile('pages/classement/classementPilote.html');
+    reply.sendFile('pages/resultat/pilote/resultat.html');
+});
+
+fastify.get('/classement/ecuries', async (request, reply) => {
+    reply.sendFile('pages/resultat/ecurie/resultat.html');
 });
 
 fastify.get('/admin/ecurie', async (request, reply) => {

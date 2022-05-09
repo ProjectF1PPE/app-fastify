@@ -1,38 +1,41 @@
 ﻿"use strict";
 
-let lesGp = [];
-
 window.onload = init
 
 async function init() {
     try {
         const data = (await axios.get("/api/resultats/gp")).data;
-        lesGp = data;
         remplirLesGrandsPrix(data);
-    } catch(e) {
-        throw e;
-    }
-    try {
-        const data = (await axios.get("/api/resultats/pilotes/")).data;
-        afficherPilote(data);
     } catch(e) {
         throw e;
     }
 }
 
-async function remplirLesGrandsPrix(data) {
-        let selectGp = document.getElementById('selectGp');
+function remplirLesGrandsPrix(data) {
+    let selectGp = document.getElementById('selectGp');
 
-        for (const gp of data) {
-            selectGp.appendChild(new Option(gp.nom, gp.id));
+    for (const gp of data) {
+        selectGp.appendChild(new Option(gp.nom, gp.id));
+
+        console.log(gp.id);
+
+        selectGp.onchange = async () => {
+            try {
+                const data = (await axios.get("/api/resultats/pilotes/", { params: { gp: gp.id }})).data;
+                afficherPilote(data);
+            } catch(e) {
+                throw e;
+            }
         }
-
+    }
 }
 
 /**
  * demande d'ajout dans la base de données
  */
 function afficherPilote(data) {
+    lesLignes.innerHTML = "";
+
     for (let pilote of data) {
         let tr = document.getElementById("lesLignes").insertRow();
 
@@ -55,7 +58,6 @@ function afficherPilote(data) {
         tr.insertCell(2).appendChild(img2);
 
         tr.insertCell().innerText = pilote.point;
-
     }
 }
 
