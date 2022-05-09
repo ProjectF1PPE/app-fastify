@@ -21,7 +21,9 @@ function remplirLesGrandsPrix(data) {
 
         selectGp.onchange = async () => {
             try {
-                const data = (await axios.get("/api/resultats/pilotes/", { params: { gp: gp.id }})).data;
+                const data = (await axios.get("/api/resultats/pilotes/", { params: { gp: gp.id }}));
+                console.log(data);
+                console.log(gp.id);
                 afficherPilote(data);
             } catch(e) {
                 throw e;
@@ -30,9 +32,6 @@ function remplirLesGrandsPrix(data) {
     }
 }
 
-/**
- * demande d'ajout dans la base de données
- */
 function afficherPilote(data) {
     lesLignes.innerHTML = "";
 

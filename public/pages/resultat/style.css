@@ -10,3 +10,6 @@ body {
     background-attachment: fixed;
     margin-top:10%;
 }
+.overlay::after {
+    display : none;
+}
