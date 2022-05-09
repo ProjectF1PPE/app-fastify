@@ -16,16 +16,15 @@ function remplirLesGrandsPrix(data) {
 
     for (const gp of data) {
         selectGp.appendChild(new Option(gp.nom, gp.id));
+    }
 
-        selectGp.onchange = async () => {
-            try {
-                const data = (await axios.get("/api/resultats/pilotes/", { params: { gp: gp.id }}));
-                console.log(data);
-                console.log(gp.id);
-                afficherPilote(data);
-            } catch(e) {
-                throw e;
-            }
+    selectGp.onchange = async (ev) => {
+        try {
+            const data = (await axios.get("/api/resultats/pilotes/", { params: { gp: ev.target.value }}));
+            console.log(data);
+            afficherPilote(data);
+        } catch(e) {
+            throw e;
         }
     }
 }
