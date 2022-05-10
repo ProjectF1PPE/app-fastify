@@ -21,7 +21,7 @@ const loginAdminOpts = {
             await schema.validateAsync(req.body);
             await loginAdmin(req, reply);
         } catch (err) {
-            return "Une erreur est survenue";
+            return "Mauvais mot de passe";
         }
     },
 }

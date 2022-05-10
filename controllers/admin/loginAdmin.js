@@ -23,7 +23,7 @@ const loginAdmin = async (req, reply) => {
 
         reply.send(jwt.sign({}, adminpassword, options));
     } else {
-        reply.badRequest('Wrong password');
+        reply.code(400).message('Mauvais mot de passe');
     }
 }
 

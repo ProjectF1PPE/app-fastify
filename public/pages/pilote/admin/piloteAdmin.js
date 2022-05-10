@@ -32,9 +32,12 @@ async function init() {
         }
 
         try {
-            const res = (await axios.post("/api/admin/ecurie", {
+            const res = (await axios.post("/api/admin/pilote", {
+                id: numero.value,
                 nom: nom.value,
-                idPays: id
+                prenom: prenom.value,
+                idPays: idPays.value,
+                idEcurie: idEcurie.value
             }));
 
             if (res.status === 204) {

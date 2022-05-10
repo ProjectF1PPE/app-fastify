@@ -46,6 +46,15 @@ const postEcurie = async (req, reply) => {
     reply.code(204);
 }
 
+const deleteEcurie = async (req, reply) => {
+    const body = req.body;
+    console.log(body);
+
+    const [rows, fields] = await pool.query('DELETE FROM ecurie where id=?', [body.id]);
+
+    reply.code(204);
+}
+
 const putEcurie = async (req, reply) => {
     const body = req.body;
     console.log(body);
@@ -57,5 +66,6 @@ const putEcurie = async (req, reply) => {
 
 module.exports = {
     getEcuries,
-    postEcurie
+    postEcurie,
+    deleteEcurie
 }

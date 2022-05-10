@@ -3,6 +3,8 @@ const {
     postPilote,
 } = require('../../controllers/admin/pilotesAdmin')
 
+const authorizedOnly = require('../../middlewares/autorizedOnly');
+
 const Pilote = {
     type: 'object',
     properties: {
@@ -21,6 +23,7 @@ const getPilotesOpts = {
             },
         },
     },
+    //preHandler: authorizedOnly,
     handler: getPilotes,
 }
 
@@ -32,6 +35,7 @@ const postPiloteOpts = {
             },
         },
     },
+    //preHandler: authorizedOnly,
     handler: postPilote,
 }
 
