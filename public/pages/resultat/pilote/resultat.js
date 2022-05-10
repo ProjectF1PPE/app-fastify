@@ -36,7 +36,7 @@ function afficherPilote(data) {
         let tr = document.getElementById("lesLignes").insertRow();
 
         tr.insertCell().innerText = pilote.place;
-
+        tr.classList.add('text-white');
         let img = new Image();
         img.src = "/pages/pilote/ressource/" + pilote.idPilote + ".jpg";
         img.onerror = () => {
@@ -45,7 +45,7 @@ function afficherPilote(data) {
         tr.insertCell().appendChild(img)
 
         tr.insertCell().innerText = pilote.nom + " " + pilote.prenom;
-
+        tr.classList.add('text-white');
         let img2 = new Image();
         img2.src = '/ressource/pays/' + pilote.idPays + '.png';
         img2.onerror = () => {
@@ -57,6 +57,7 @@ function afficherPilote(data) {
         tr.insertCell().appendChild(img2);
 
         tr.insertCell().innerText = pilote.point;
+        tr.classList.add('text-white');
     }
 }
 
