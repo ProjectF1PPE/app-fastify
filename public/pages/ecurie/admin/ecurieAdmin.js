@@ -125,11 +125,9 @@ function remplirLesEcuries(data) {
         ecurie.pilotes.sort((piloteA, piloteB) => {
             return piloteA.ordre - piloteB.ordre
         });
-
-        for (let pilote of ecurie.pilotes) {
-            tr.insertCell().innerText = pilote.nom;
         }
-    }
+
+
 }
 
 function ajouter() {
@@ -164,4 +162,6 @@ function ajouter() {
         error: (reponse) => Std.afficherErreur(reponse.responseText)
     })
 }
+
+
 
