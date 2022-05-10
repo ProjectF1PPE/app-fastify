@@ -16,45 +16,36 @@ async function init() {
     }
 
     try {
-        const data = (await axios.get("/api/ecuries")).data;
-        remplirLesEcuries(data);
+        const data = (await axios.get("/api/pilotes")).data;
+        remplirLesPilotes(data);
     } catch(e) {
         throw e;
     }
 
     btnAjouter.onclick = async () => {
-        console.log("zdzdz");
-        console.log(nom.value);
-        console.log(id);
-
         if (id === undefined) {
             return;
         }
 
         try {
             const res = (await axios.post("/api/admin/pilote", {
-                id: numero.value,
+                idPays: id,
                 nom: nom.value,
                 prenom: prenom.value,
-                idPays: idPays.value,
+                id: id.value,
+                ordre: ordre.value,
                 idEcurie: idEcurie.value
             }));
 
             if (res.status === 204) {
-                // montrer que c'est bien ajouté
-
-                id = undefined;
-                nom.innerText = "";
-
-                console.log('bien ajouté');
+                alert("Le pilote a bien été ajouté");
             } else {
-                // montrer qu'il y a eu une erreur
-                console.log("erreur !");
+                alert("Erreur : le pilote n'a pas été correctement ajouté");
             }
         } catch(e) {
             throw e;
         }
-    }
+    };
 }
 
 function remplirLesPays(data) {
@@ -68,62 +59,47 @@ function remplirLesPays(data) {
     }
 }
 
-function remplirLesEcuries(data) {
-    for (const ecurie of data) {
+async function remplirLesPilotes(data) {
+    for (const pilote of data) {
         let tr = document.getElementById("lesLignes").insertRow();
 
-        tr.insertCell().innerText = ecurie.id
-        tr.insertCell().innerText = ecurie.nom
+        tr.insertCell().innerText = pilote.id
+        tr.insertCell().innerText = pilote.nom + " " + pilote.prenom
 
-        let img = new Image()
-        img.src = "/pages/ecurie/admin/img/" + ecurie.id + ".png"
-        img.onerror = () => {
-            img.src = "/pages/ecurie/admin/img/default.png"
-        }
+        let img = document.createElement('img');
+        img.src = '/ressource/pays/' + pilote.idPays + '.png';
+        img.style.width = "40px";
+        img.style.height = "25px";
+        img.alt = "";
         tr.insertCell().appendChild(img);
 
-        tr.insertCell().innerText = ecurie.nomPays;
+        tr.insertCell().innerText = pilote.idEcurie;
 
-        ecurie.pilotes.sort((piloteA, piloteB) => {
-            return piloteA.ordre - piloteB.ordre
-        });
+        tr.insertCell().innerText = pilote.ordre;
 
-        for (let pilote of ecurie.pilotes) {
-            tr.insertCell().innerText = pilote.nom;
-        }
+
+        let btnSupprimer = document.createElement('button');
+        btnSupprimer.innerHTML = "Supprimer";
+        btnSupprimer.type = "submit";
+
+        btnSupprimer.onclick = async () => {
+            try {
+                const res = (await axios.delete("/api/admin/pilote", {
+                    data: {
+                        id: pilote.id
+                    }
+                }));
+
+                if (res.status === 204) {
+                    alert("Le pilote a bien été supprimée");
+                } else {
+                    alert("Erreur : le pilote n'a pas été correctement supprimée");
+                }
+            } catch(e) {
+                throw e;
+            }
+        };
+
+        tr.insertCell().appendChild(btnSupprimer);
     }
 }
-
-function ajouter() {
-    // contrôle des champs de saisie
-    let erreur = false;
-    for (const input of document.getElementsByClassName('ctrl')) {
-        input.nextElementSibling.innerText = input.validationMessage;
-        if (!input.checkValidity()) erreur = true;
-    }
-    // if (!Std.controler(input)) erreur = true;
-    // si une erreur est détectée on quitte la fonction
-    if (erreur) return;
-
-
-    //  demande d'ajout dans la base de données
-    $.ajax({
-        url: 'ajax/ajouter.php',
-        type: 'POST',
-        data: {
-            nom: nom.value,
-            idPays: idPays.value,
-            photo: photo.value,
-        },
-        dataType: "json",
-        success: function () {
-            Std.afficherSucces('Ecurie ajouté')
-            // effacer le contenu des champs
-            for(const input of document.querySelectorAll('input.ctrl'))
-                input.value = "";
-            nom.focus();
-        },
-        error: (reponse) => Std.afficherErreur(reponse.responseText)
-    })
-}
-

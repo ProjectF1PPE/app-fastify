@@ -11,14 +11,14 @@ async function init() {
         const data = (await axios.get("/api/pays")).data;
         lesPays = data;
         remplirLesPays(data);
-    } catch(e) {
+    } catch (e) {
         throw e;
     }
 
     try {
         const data = (await axios.get("/api/ecuries")).data;
         remplirLesEcuries(data);
-    } catch(e) {
+    } catch (e) {
         throw e;
     }
 
@@ -38,7 +38,7 @@ async function init() {
             } else {
                 alert("Erreur : l'écurie n'a pas été correctement ajouté");
             }
-        } catch(e) {
+        } catch (e) {
             throw e;
         }
     };
@@ -96,15 +96,38 @@ async function remplirLesEcuries(data) {
                 } else {
                     alert("Erreur : l'écurie n'a pas été correctement supprimée");
                 }
-            } catch(e) {
-                console.log(e);
-                alert('ouops');
+            } catch (e) {
                 throw e;
             }
-        };
 
+        }
         tr.insertCell().appendChild(btnSupprimer);
-    }
+            let btnModifier = document.createElement('button');
+            btnModifier.innerHTML = "Modifier";
+            btnModifier.type = "submit";
+
+            btnModifier.onclick = async () => {
+                try {
+                    const res = (await axios.put("/api/admin/ecurie", {
+                        data: {
+                            nom: nom.value,
+                            idPays: id
+                        }
+                    }));
+
+                    if (res.status === 204) {
+                        alert("L'écurie a bien été modifiée");
+                    } else {
+                        alert("Erreur : l'écurie n'a pas été correctement modifiée");
+                    }
+                } catch (e) {
+                    throw e;
+                }
+            };
+
+            tr.insertCell().appendChild(btnModifier);
+        }
+
 }
 
 

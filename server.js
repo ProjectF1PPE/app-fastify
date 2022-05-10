@@ -60,7 +60,7 @@ fastify.get('/classement/ecuries', async (request, reply) => {
 });
 
 fastify.get('/admin', async (request, reply) => {
-    reply.sendFile('pages/admin/admin.html');
+    reply.sendFile('/indexAdmin.html');
 });
 
 fastify.get('/admin/ecurie', async (request, reply) => {
@@ -69,6 +69,15 @@ fastify.get('/admin/ecurie', async (request, reply) => {
 
 fastify.get('/admin/pilote', async (request, reply) => {
     reply.sendFile('pages/pilote/admin/piloteAdmin.html');
+});
+fastify.get('/admin/gp', async (request, reply) => {
+    reply.sendFile('pages/gp/admin/gp.html');
+});
+fastify.get('/admin/classement/pilotes', async (request, reply) => {
+    reply.sendFile('pages/resultat/pilote/admin/resultat.html');
+});
+fastify.get('/admin/classement/ecuries', async (request, reply) => {
+    reply.sendFile('pages/resultat/ecurie/admin/resultat.html');
 });
 
 const start = async () => {

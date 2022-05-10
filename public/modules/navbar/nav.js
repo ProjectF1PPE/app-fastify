@@ -53,7 +53,7 @@ async function login() {
     try {
         const data = (await axios.post("/api/admin/login", {password:password1.value}));
         alert("Vous êtes connecté");
-        window.location.href='/index.html';
+        window.location.href='/admin';
     } catch (e) {
         alert("Mot de passe incorrect");
         throw e;
