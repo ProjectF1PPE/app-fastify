@@ -23,10 +23,6 @@ async function init() {
     }
 
     btnAjouter.onclick = async () => {
-        console.log("zdzdz");
-        console.log(nom.value);
-        console.log(id);
-
         if (id === undefined) {
             return;
         }
@@ -38,26 +34,34 @@ async function init() {
             }));
 
             if (res.status === 204) {
-                // montrer que c'est bien ajouté
-
-                id = undefined;
-                nom.innerText = "";
-
                 alert("L'écurie a bien été ajouté");
-
-                console.log('bien ajouté');
             } else {
-                // montrer qu'il y a eu une erreur
-
                 alert("Erreur : l'écurie n'a pas été correctement ajouté");
-
-                console.log("erreur !");
-
             }
         } catch(e) {
             throw e;
         }
-    }
+    };
+
+    btnSupprimer.onclick = async () => {
+        if (id === undefined) {
+            return;
+        }
+
+        try {
+            const res = (await axios.delete("/api/admin/ecurie", {
+                id: id
+            }));
+
+            if (res.status === 204) {
+                alert("L'écurie a bien été ajouté");
+            } else {
+                alert("Erreur : l'écurie n'a pas été correctement ajouté");
+            }
+        } catch(e) {
+            throw e;
+        }
+    };
 
     btnModifier.onclick = async () => {
         console.log("zdzdz");
@@ -125,42 +129,7 @@ function remplirLesEcuries(data) {
         ecurie.pilotes.sort((piloteA, piloteB) => {
             return piloteA.ordre - piloteB.ordre
         });
-        }
-
-
-}
-
-function ajouter() {
-    // contrôle des champs de saisie
-    let erreur = false;
-    for (const input of document.getElementsByClassName('ctrl')) {
-        input.nextElementSibling.innerText = input.validationMessage;
-        if (!input.checkValidity()) erreur = true;
     }
-    // if (!Std.controler(input)) erreur = true;
-    // si une erreur est détectée on quitte la fonction
-    if (erreur) return;
-
-
-    //  demande d'ajout dans la base de données
-    $.ajax({
-        url: 'ajax/ajouter.php',
-        type: 'POST',
-        data: {
-            nom: nom.value,
-            idPays: idPays.value,
-            photo: photo.value,
-        },
-        dataType: "json",
-        success: function () {
-            Std.afficherSucces('Ecurie ajouté')
-            // effacer le contenu des champs
-            for(const input of document.querySelectorAll('input.ctrl'))
-                input.value = "";
-            nom.focus();
-        },
-        error: (reponse) => Std.afficherErreur(reponse.responseText)
-    })
 }
 
 
