@@ -11,7 +11,6 @@ body {
 }
 nav {
     background-color: black;
-    opacity: 0.3;
 }
 @media screen and (max-width: 767px) {
 
