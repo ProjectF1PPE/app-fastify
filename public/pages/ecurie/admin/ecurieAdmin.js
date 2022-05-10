@@ -43,9 +43,50 @@ async function init() {
                 id = undefined;
                 nom.innerText = "";
 
+                alert("L'écurie a bien été ajouté");
+
                 console.log('bien ajouté');
             } else {
                 // montrer qu'il y a eu une erreur
+
+                alert("Erreur : l'écurie n'a pas été correctement ajouté");
+
+                console.log("erreur !");
+
+            }
+        } catch(e) {
+            throw e;
+        }
+    }
+
+    btnModifier.onclick = async () => {
+        console.log("zdzdz");
+        console.log(nom.value);
+        console.log(id);
+
+        if (id === undefined) {
+            return;
+        }
+
+        try {
+            const res = (await axios.put("/api/admin/ecurie", {
+                nom: nom.value,
+                idPays: id
+            }));
+
+
+            if (res.status === 204) {
+                // montrer que c'est bien ajouté
+
+                id = undefined;
+                nom.innerText = "";
+
+                alert("Modification réussie");
+                console.log('bien ajouté');
+            } else {
+                // montrer qu'il y a eu une erreur
+
+                alert("La modification n'a pas été réussie");
                 console.log("erreur !");
             }
         } catch(e) {
@@ -84,11 +125,9 @@ function remplirLesEcuries(data) {
         ecurie.pilotes.sort((piloteA, piloteB) => {
             return piloteA.ordre - piloteB.ordre
         });
-
-        for (let pilote of ecurie.pilotes) {
-            tr.insertCell().innerText = pilote.nom;
         }
-    }
+
+
 }
 
 function ajouter() {
@@ -123,4 +162,6 @@ function ajouter() {
         error: (reponse) => Std.afficherErreur(reponse.responseText)
     })
 }
+
+
 
