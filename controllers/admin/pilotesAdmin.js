@@ -41,7 +41,8 @@ const postPilote = async (req, reply) => {
     const body = req.body;
     console.log(body);
 
-    const [rows, fields] = await pool.query('INSERT INTO pilote(id, nom, prenom, ordre, idPays, idEcurie) values(?, ?, ?)', [body.nom, body.photo, body.idPays]);
+    const [rows, fields] = await pool.query('INSERT INTO pilote(id, nom, prenom, ordre, idPays, idEcurie) values(?, ?, ?, ?, ?, ?)',
+        [body.id, body.nom, body.prenom, body.ordre, body.idPays, body.idEcurie]);
 
     reply.code(204);
 }
