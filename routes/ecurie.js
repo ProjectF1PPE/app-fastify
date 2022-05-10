@@ -4,7 +4,7 @@ const {
     addEcurie,
     deleteEcurie,
     updateEcurie,
-} = require('../../controllers/ecurie/ecuries')
+} = require('../controllers/ecuries')
 
 const Ecurie = {
     type: 'object',

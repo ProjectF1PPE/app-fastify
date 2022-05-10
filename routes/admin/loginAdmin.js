@@ -1,6 +1,6 @@
 const {
     loginAdmin,
-} = require('../controllers/loginAdmin')
+} = require('../../controllers/admin/loginAdmin')
 
 const S = require('fluent-json-schema');
 const joi = require('joi');

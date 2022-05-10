@@ -1,16 +1,16 @@
 const {
     getResultatsPilotes
-} = require('../../controllers/resultats/pilotes')
+} = require('../controllers/resultatsPilotes')
 
 const Pilote = {
     type: 'object',
     properties: {
-        place: { type: 'number' },
-        id: { type: 'number' },
+        idPilote: { type: 'integer' },
+        place: { type: 'integer' },
+        point: { type: 'integer' },
         idPays: { type: 'string' },
         nom: { type: 'string' },
-        ecurie: { type: 'string' },
-        points: { type: 'number' },
+        prenom: { type: 'string' }
     },
 }
 
@@ -30,7 +30,7 @@ const getPilotesOpts = {
 }
 
 function piloteRoutes(fastify, options, done) {
-    fastify.get('/api/resultats/pilotes/?gp=', getPilotesOpts)
+    fastify.get('/api/resultats/pilotes/', getPilotesOpts)
 
     done()
 }

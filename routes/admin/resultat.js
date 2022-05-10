@@ -1,6 +1,6 @@
 const {
     addResultat
-} = require('../../../controllers/resultats/admin/resultatsAdmin')
+} = require('../../controllers/admin/resultatsAdmin')
 
 const Resultat = {
     type: 'object',

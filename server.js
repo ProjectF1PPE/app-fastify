@@ -19,16 +19,17 @@ fastify.register(fastifyStatic, {
     prefix: '/',
 });
 
-fastify.register(require('./routes/ecurie/ecurie'));
-fastify.register(require('./routes/ecurie/admin/adminEcurie'));
+fastify.register(require('./routes/ecurie'));
 fastify.register(require('./routes/gp'));
-fastify.register(require('./routes/pilote'));
 fastify.register(require('./routes/pays'));
-fastify.register(require('./routes/resultats/gp'));
-fastify.register(require('./routes/resultats/pilote'));
-fastify.register(require('./routes/resultats/admin/resultat'));
-fastify.register(require('./routes/loginAdmin'));
+fastify.register(require('./routes/pilote'));
+fastify.register(require('./routes/resultatsGP'));
+fastify.register(require('./routes/resultatsPilote'));
 
+fastify.register(require('./routes/admin/adminEcurie'));
+fastify.register(require('./routes/admin/adminPilote'));
+fastify.register(require('./routes/admin/loginAdmin'));
+fastify.register(require('./routes/admin/resultat'));
 
 fastify.get('/insomnia', async (request, reply) => {
     reply.sendFile('insomnia.json');
@@ -60,6 +61,10 @@ fastify.get('/classement/ecuries', async (request, reply) => {
 
 fastify.get('/admin/ecurie', async (request, reply) => {
     reply.sendFile('pages/ecurie/admin/ecurieAdmin.html');
+});
+
+fastify.get('/admin', async (request, reply) => {
+    reply.sendFile('pages/admin/admin.html');
 });
 
 const start = async () => {

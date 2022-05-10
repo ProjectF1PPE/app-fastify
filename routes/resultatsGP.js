@@ -1,6 +1,6 @@
 const {
     getGP,
-} = require('../../controllers/resultats/gp')
+} = require('../controllers/resultatsGP')
 
 const GP = {
     type: 'object',

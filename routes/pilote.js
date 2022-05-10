@@ -7,8 +7,8 @@ const Pilote = {
     properties: {
         id: { type: 'string' },
         nom: { type: 'string' },
-        prenom: { type : 'string'},
-        idPays: {type:'string'}
+        prenom: { type: 'string' },
+        idPays: { type: 'string' },
     },
 }
 

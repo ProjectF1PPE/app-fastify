@@ -1,6 +1,6 @@
-const pool = require('../../../database');
+const pool = require('../../database');
 
-const getEcuries = async (req, reply) => {
+const getPilotes = async (req, reply) => {
     const [ecuries, ecuriesFields] = await pool.query('SELECT id, nom, photo, idPays from ecurie');
     const [pilotes, pilotesFields] = await pool.query('SELECT id, nom, prenom, ordre, idEcurie from pilote');
     const [pays, paysFields] = await pool.query('SELECT id, nom from pays');
@@ -37,16 +37,16 @@ const getEcuries = async (req, reply) => {
     reply.send(result);
 }
 
-const postEcurie = async (req, reply) => {
+const postPilote = async (req, reply) => {
     const body = req.body;
     console.log(body);
 
-    const [rows, fields] = await pool.query('INSERT INTO ecurie(nom, photo, idPays) values(?, ?, ?)', [body.nom, body.photo, body.idPays]);
+    const [rows, fields] = await pool.query('INSERT INTO pilote(id, nom, prenom, ordre, idPays, idEcurie) values(?, ?, ?)', [body.nom, body.photo, body.idPays]);
 
     reply.code(204);
 }
 
-const putEcurie = async (req, reply) => {
+const putPilote = async (req, reply) => {
     const body = req.body;
     console.log(body);
 
@@ -56,6 +56,6 @@ const putEcurie = async (req, reply) => {
 }
 
 module.exports = {
-    getEcuries,
-    postEcurie
+    getPilotes,
+    postPilote
 }

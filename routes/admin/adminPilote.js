@@ -1,8 +1,9 @@
 const {
-    getEcuries, postEcurie,
-} = require('../../../controllers/ecurie/admin/ecuriesAdmin')
+    getPilotes,
+    postPilote,
+} = require('../../controllers/admin/pilotesAdmin')
 
-const Ecurie = {
+const Pilote = {
     type: 'object',
     properties: {
         id: { type: 'number' },
@@ -12,7 +13,7 @@ const Ecurie = {
     },
 }
 
-const getEcuriesOpts = {
+const getPilotesOpts = {
     schema: {
         response: {
             200: {
@@ -20,10 +21,10 @@ const getEcuriesOpts = {
             },
         },
     },
-    handler: getEcuries,
+    handler: getPilotes,
 }
 
-const postEcurieOpts = {
+const postPiloteOpts = {
     schema: {
         response: {
             200: {
@@ -31,14 +32,14 @@ const postEcurieOpts = {
             },
         },
     },
-    handler: postEcurie,
+    handler: postPilote,
 }
 
-function adminEcuriesRoutes(fastify, options, done) {
-    fastify.get('/api/admin/ecuries', getEcuriesOpts)
-    fastify.post('/api/admin/ecurie', postEcurieOpts)
+function adminPilotesRoutes(fastify, options, done) {
+    fastify.get('/api/admin/pilotes', getPilotesOpts)
+    fastify.post('/api/admin/pilotes', postPiloteOpts)
 
     done()
 }
 
-module.exports = adminEcuriesRoutes
+module.exports = adminPilotesRoutes
