@@ -42,61 +42,6 @@ async function init() {
             throw e;
         }
     };
-
-    btnSupprimer.onclick = async () => {
-        if (id === undefined) {
-            return;
-        }
-
-        try {
-            const res = (await axios.delete("/api/admin/ecurie", {
-                id: id
-            }));
-
-            if (res.status === 204) {
-                alert("L'écurie a bien été ajouté");
-            } else {
-                alert("Erreur : l'écurie n'a pas été correctement ajouté");
-            }
-        } catch(e) {
-            throw e;
-        }
-    };
-
-    btnModifier.onclick = async () => {
-        console.log("zdzdz");
-        console.log(nom.value);
-        console.log(id);
-
-        if (id === undefined) {
-            return;
-        }
-
-        try {
-            const res = (await axios.put("/api/admin/ecurie", {
-                nom: nom.value,
-                idPays: id
-            }));
-
-
-            if (res.status === 204) {
-                // montrer que c'est bien ajouté
-
-                id = undefined;
-                nom.innerText = "";
-
-                alert("Modification réussie");
-                console.log('bien ajouté');
-            } else {
-                // montrer qu'il y a eu une erreur
-
-                alert("La modification n'a pas été réussie");
-                console.log("erreur !");
-            }
-        } catch(e) {
-            throw e;
-        }
-    }
 }
 
 function remplirLesPays(data) {
@@ -110,7 +55,7 @@ function remplirLesPays(data) {
     }
 }
 
-function remplirLesEcuries(data) {
+async function remplirLesEcuries(data) {
     for (const ecurie of data) {
         let tr = document.getElementById("lesLignes").insertRow();
 
@@ -129,6 +74,36 @@ function remplirLesEcuries(data) {
         ecurie.pilotes.sort((piloteA, piloteB) => {
             return piloteA.ordre - piloteB.ordre
         });
+
+        for (let pilote of ecurie.pilotes) {
+            tr.insertCell().innerText = pilote.nom;
+        }
+
+        let btnSupprimer = document.createElement('button');
+        btnSupprimer.innerHTML = "Supprimer";
+        btnSupprimer.type = "submit";
+
+        btnSupprimer.onclick = async () => {
+            try {
+                const res = (await axios.delete("/api/admin/ecurie", {
+                    data: {
+                        id: ecurie.id
+                    }
+                }));
+
+                if (res.status === 204) {
+                    alert("L'écurie a bien été supprimée");
+                } else {
+                    alert("Erreur : l'écurie n'a pas été correctement supprimée");
+                }
+            } catch(e) {
+                console.log(e);
+                alert('ouops');
+                throw e;
+            }
+        };
+
+        tr.insertCell().appendChild(btnSupprimer);
     }
 }
 
