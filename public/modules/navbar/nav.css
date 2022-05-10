@@ -141,6 +141,8 @@
 .admin{
     color:white;
     padding-right: 5%;
+    background-color: transparent;
+    padding: 25px;
 }
 body {
     background:linear-gradient(to bottom, black 80%, red);

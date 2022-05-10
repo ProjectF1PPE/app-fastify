@@ -4,7 +4,7 @@
       integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
 <script src="/modules/navbar/nav.js"></script>
 <!-- jQuery -->
-<script src='https://code.jquery.com/jquery-3.3.1.slim.min.js'></script>
+<script src="//code.jquery.com/jquery-3.6.0.min.js"></script>
 <!-- Popper JS -->
 <script src='https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js'></script>
 <!-- Bootstrap JS -->
@@ -34,7 +34,7 @@
             </div>
         </div>
 
-        <div class = "container" >
+        <div>
             <button type="button" href="/admin" class="admin bi bi-person-lines-fill" data-toggle="modal" data-target="#loginModal"></button>
         </div>
         <div class="modal fade" id="loginModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -55,7 +55,8 @@
                                 <div class="form-group">
                                     <input type="password" class="form-control" id="password1" placeholder="Le mot de passe...">
                                 </div>
-                                <button type="button" class="btn btn-info btn-block btn-round">Connexion</button>
+                                </br>
+                                <button type="button" id="btnConnexion"class="btn btn-info btn-block btn-round">Connexion</button>
                             </form>
                         </div>
                     </div>
