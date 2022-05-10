@@ -35,7 +35,7 @@ function afficher(data) {
         let corps = document.createElement('div');
         corps.classList.add("card-body", "text-center");
         let img = document.createElement('img');
-        img.src = '/pages/pilote/img/' + pilote.id + '.jpg';
+        img.src = '/pages/pilote/ressource/' + pilote.id + '.jpg';
         img.style.width = "150px";
         img.style.height = "150px";
         img.alt = "";

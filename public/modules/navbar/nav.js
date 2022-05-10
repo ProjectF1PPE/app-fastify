@@ -1,3 +1,12 @@
+
+btnConnexion.onclick = () => login();
+
+password1.onkeydown = (ev) => {
+    if (ev.keyCode === 13) {
+        login();
+    }
+};
+
 jQuery(function ($) {
     $(window).on('scroll', function () {
         if ($(this).scrollTop() >= 200) {
@@ -6,14 +15,6 @@ jQuery(function ($) {
             $('.navbar').removeClass('fixed-top');
         }
     });
-
-    btnConnexion.onclick = () => login();
-
-    password1.onkeydown = (ev) => {
-        if (ev.keyCode === 13) {
-            login();
-        }
-    };
 
     function adjustNav() {
         var winWidth = $(window).width(),
@@ -40,6 +41,7 @@ jQuery(function ($) {
     adjustNav();
 
 });
+
 $(document).ready(function() {
     $('#loginModal').modal('show');
     $(function () {

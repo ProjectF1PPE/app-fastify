@@ -24,9 +24,9 @@ function afficher(data) {
         tr.insertCell().innerText = ecurie.nom
 
         let img = new Image()
-        img.src = "/pages/ecurie/img/" + ecurie.id + ".png"
+        img.src = "/pages/ecurie/ressource/" + ecurie.id + ".png";
         img.onerror = () => {
-            img.src = "/pages/ecurie/img/default.png"
+            img.src = "/pages/ecurie/ressource/default.png"
         }
         tr.insertCell().appendChild(img);
 

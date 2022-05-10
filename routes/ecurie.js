@@ -76,15 +76,11 @@ const updateEcurieOpts = {
 }
 
 function ecurieRoutes(fastify, options, done) {
-    fastify.get('/api/ecuries', getEcuriesOpts)
-
-    fastify.get('/api/ecuries/:id', getEcurieOpts)
-
-    fastify.post('/api/ecuries', postEcurieOpts)
-
-    fastify.delete('/api/ecuries/:id', deleteEcurieOpts)
-
-    fastify.put('/api/ecuries/:id', updateEcurieOpts)
+    fastify.get('/api/ecuries', getEcuriesOpts);
+    fastify.get('/api/ecuries/:id', getEcurieOpts);
+    fastify.post('/api/ecuries', postEcurieOpts);
+    fastify.delete('/api/ecuries/:id', deleteEcurieOpts);
+    fastify.put('/api/ecuries/:id', updateEcurieOpts);
 
     done()
 }

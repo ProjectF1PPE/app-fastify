@@ -41,8 +41,8 @@ const postPilote = async (req, reply) => {
     const body = req.body;
     console.log(body);
 
-    const [rows, fields] = await pool.query('INSERT INTO pilote(id, nom, prenom, ordre, idPays, idEcurie) values(?, ?, ?, ?, ?, ?)',
-        [body.id, body.nom, body.prenom, body.ordre, body.idPays, body.idEcurie]);
+    const [rows, fields] = await pool.query('INSERT INTO pilote(id, nom, prenom, dateNaissance, ordre, idPays, idEcurie) values(?, ?, ?, ?, ?, ?, ?)',
+        [body.id, body.nom, body.prenom, body.dateNaissance, body.ordre, body.idPays, body.idEcurie]);
 
     reply.code(204);
 }
@@ -51,12 +51,14 @@ const putPilote = async (req, reply) => {
     const body = req.body;
     console.log(body);
 
-    const [rows, fields] = await pool.query('INSERT INTO ecurie(nom, idPays) values(?, ?)', [body.nom, body.idPays]);
+    const [rows, fields] = await pool.query('UPDATE pilote SET nom=?, prenom=?, dateNaissance=?, ordre=?, idPays=?, idEcurie=? where id=?',
+        [body.nom, body.prenom, body.dateNaissance, body.ordre, body.idPays, body.idEcurie, body.id]);
 
     reply.code(204);
 }
 
 module.exports = {
     getPilotes,
-    postPilote
+    postPilote,
+    putPilote
 }

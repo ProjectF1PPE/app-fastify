@@ -1,5 +1,5 @@
 const {
-    getEcuries, postEcurie, deleteEcurie
+    getEcuries, postEcurie, deleteEcurie, putEcurie
 } = require('../../controllers/admin/ecuriesAdmin')
 
 /*
@@ -54,10 +54,22 @@ const deleteEcurieOpts = {
     handler: deleteEcurie,
 }
 
+const putEcurieOpts = {
+    schema: {
+        response: {
+            200: {
+                type: 'array'
+            },
+        },
+    },
+    handler: putEcurie,
+}
+
 function adminEcuriesRoutes(fastify, options, done) {
     fastify.get('/api/admin/ecuries', getEcuriesOpts)
     fastify.post('/api/admin/ecurie', postEcurieOpts)
     fastify.delete('/api/admin/ecurie', deleteEcurieOpts)
+    fastify.put('/api/admin/ecurie', putEcurieOpts)
 
     done()
 }

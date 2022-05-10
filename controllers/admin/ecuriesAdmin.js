@@ -59,7 +59,13 @@ const putEcurie = async (req, reply) => {
     const body = req.body;
     console.log(body);
 
-    const [rows, fields] = await pool.query('INSERT INTO ecurie(nom, idPays) values(?, ?)', [body.nom, body.idPays]);
+    if (body.nom != undefined) {
+        const [rows, fields] = await pool.query('UPDATE ecurie SET nom=? where id=?', [body.nom, body.id]);
+    }
+
+    if (body.idPays != undefined) {
+        const [rows, fields] = await pool.query('UPDATE ecurie SET idPays=? where id=?', [body.idPays, body.id]);
+    }
 
     reply.code(204);
 }
@@ -67,5 +73,6 @@ const putEcurie = async (req, reply) => {
 module.exports = {
     getEcuries,
     postEcurie,
-    deleteEcurie
+    deleteEcurie,
+    putEcurie
 }
