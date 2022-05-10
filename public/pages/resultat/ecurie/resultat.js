@@ -11,40 +11,53 @@ async function init() {
     }
 }
 
-async function remplirLesGrandsPrix(data) {
-    for (const gp of data) {
-        // ajouter le gp à la liste qui affiche les gp
+function remplirLesGrandsPrix(data) {
+    let selectGp = document.getElementById('selectGp');
 
-        // mettre un event de on click
-        // faire ca
+    for (const gp of data) {
+        selectGp.appendChild(new Option(gp.nom, gp.id));
+    }
+
+    selectGp.onchange = async (ev) => {
         try {
-            const data = (await axios.get("/api/resultats/ecurie/", { params: {gp: gp.id }})).data;
-            afficher(data);
+            const data = (await axios.get("/api/resultats/ecuries/", { params: { gp: ev.target.value }})).data;
+            console.log(data);
+            afficherPilote(data);
         } catch(e) {
             throw e;
-        } // finir l'event
+        }
     }
 }
 
-/**
- * demande d'ajout dans la base de données
- */
-function afficher(data) {
-    for (const element of data) {
-        let tr = document.getElementById('lesLignes').insertRow();
+function afficherPilote(data) {
+    lesLignes.innerHTML = "";
 
-        // place
-        tr.insertCell().innerText = element.place;
-        // img
-        tr.insertCell().innerText = element.img;
-        // element.nom = nom + prenom
-        tr.insertCell().innerText = element.nom + element.prenom;
-        // id pays
-        tr.insertCell().innerText = element.idPays;
-        // point
-        tr.insertCell().innerText = element.point;
+    for (let pilote of data) {
+        let tr = document.getElementById("lesLignes").insertRow();
 
+        tr.insertCell().innerText = pilote.place;
+        tr.classList.add('text-white');
+        let img = new Image();
+        img.src = "/pages/pilote/ressource/" + pilote.idPilote + ".jpg";
+        img.onerror = () => {
+            img.src = "/pages/pilote/ressource/1.jpg"
+        }
+        tr.insertCell().appendChild(img)
+
+        tr.insertCell().innerText = pilote.nom + " " + pilote.prenom;
+        tr.classList.add('text-white');
+        let img2 = new Image();
+        img2.src = '/ressource/pays/' + pilote.idPays + '.png';
+        img2.onerror = () => {
+            img2.src = "/ressource/f1.png";
+        }
+        img2.style.width = "40px";
+        img2.style.height = "25px";
+        img2.alt = "";
+        tr.insertCell().appendChild(img2);
+
+        tr.insertCell().innerText = pilote.point;
+        tr.classList.add('text-white');
     }
 }
-
 
