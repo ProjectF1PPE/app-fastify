@@ -6,6 +6,14 @@ jQuery(function ($) {
             $('.navbar').removeClass('fixed-top');
         }
     });
+    btnConnexion.onclick = async () => {
+        try {
+            const data = (await axios.post("/api/admin/login")).data;
+            afficher(data);
+        } catch (e) {
+            throw e;
+        }
+    };
 
     function adjustNav() {
         var winWidth = $(window).width(),
@@ -38,3 +46,4 @@ $(document).ready(function() {
         $('[data-toggle="tooltip"]').tooltip()
     })
 });
+
