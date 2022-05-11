@@ -68,7 +68,7 @@ fastify.get('/admin/ecurie', async (request, reply) => {
 });
 
 fastify.get('/admin/pilote', async (request, reply) => {
-    reply.sendFile('pages/pilote/admin/piloteAdmin.html');
+    reply.sendFile('pages/pilote/admin/pilote.html');
 });
 fastify.get('/admin/gp', async (request, reply) => {
     reply.sendFile('pages/gp/admin/gp.html');

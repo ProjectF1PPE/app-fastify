@@ -1,7 +1,6 @@
 "use strict";
 
 let id = 'fr';
-
 let lesPays = [];
 
 window.onload = init;
@@ -35,6 +34,7 @@ async function init() {
 
             if (res.status === 204) {
                 alert("L'écurie a bien été ajouté");
+                location.reload();
             } else {
                 alert("Erreur : l'écurie n'a pas été correctement ajouté");
             }
@@ -93,6 +93,7 @@ async function remplirLesEcuries(data) {
 
                 if (res.status === 204) {
                     alert("L'écurie a bien été supprimée");
+                    location.reload();
                 } else {
                     alert("Erreur : l'écurie n'a pas été correctement supprimée");
                 }
