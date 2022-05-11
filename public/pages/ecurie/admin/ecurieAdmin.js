@@ -196,8 +196,6 @@ async function remplirLesEcuries(data) {
             }
         }
         tr.insertCell().appendChild(btnSupprimer);
-
-
     }
 
 }
