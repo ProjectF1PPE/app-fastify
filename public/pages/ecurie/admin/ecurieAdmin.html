@@ -28,20 +28,10 @@
     })
 </script>
 <div class="container">
-    <main>
-        <div>
+        <div class="ajt">
             <div class="mt-3">
                 <div class="col-sm-6">
-                    <label for="nom" class="col-form-label obligatoire " style="color:white">Nom</label>
-                    <i class="bi bi-info-circle text-primary text-center"
-                       data-bs-toggle="popover"
-                       data-bs-trigger="hover"
-                       data-bs-html="true"
-                       data-bs-placement='right'
-                       data-bs-title="<div style='font-size:10px'>
-							30 caractères maximum
-							<br> Caractères autorisés : lettres non accentuées et espace
-							</div>"></i>
+                    <label for="nom" class="col-form-label obligatoire" style="color:white">Nom</label>
                     <input id="nom"
                            type="text"
                            class="form-control ctrl"
@@ -50,6 +40,7 @@
                            maxlength='30'
                            pattern="^[A-Za-z]( ?[A-Za-z])*$"
                            autocomplete="off">
+
                     <span class='messageErreur'></span>
                 </div>
                 <div class="col-auto">
@@ -60,7 +51,6 @@
                 <button id='btnAjouter' class="btn btn btn-danger">Ajouter</button>
             </div>
         </div>
-    </main>
 </div>
 <div class="ecuries">
     <div class="row">

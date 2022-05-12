@@ -59,4 +59,9 @@ body {
         display:none;
     }
 }
+.ajt {
+    width: 300px;
+    display: inline-block;
+    horiz-align: left;
+}
 

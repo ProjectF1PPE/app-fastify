@@ -142,7 +142,7 @@ async function remplirLesEcuries(data) {
          */
 
         let btnModifier = document.createElement('button');
-        btnModifier.innerHTML = "Modifier";
+        btnModifier.classList.add('bi', 'bi-pencil-square');
         btnModifier.type = "submit";
 
         btnModifier.onclick = async () => {
@@ -162,6 +162,7 @@ async function remplirLesEcuries(data) {
 
                 if (res.status === 204) {
                     alert("L'écurie a bien été modifiée");
+                    location.reload();
                 } else {
                     alert("Erreur : l'écurie n'a pas été correctement modifiée");
                 }
@@ -174,7 +175,7 @@ async function remplirLesEcuries(data) {
 
 
         let btnSupprimer = document.createElement('button');
-        btnSupprimer.innerHTML = "Supprimer";
+        btnSupprimer.classList.add('bi','bi-backspace-fill');
         btnSupprimer.type = "submit";
 
         btnSupprimer.onclick = async () => {
