@@ -5,7 +5,7 @@ let lesPays = [];
 let lesPilotes = [];
 
 window.onload = init;
-
+// chargement des données
 async function init() {
     try {
         const data = (await axios.get("/api/pays")).data;
@@ -28,7 +28,7 @@ async function init() {
     } catch (e) {
         throw e;
     }
-
+//évenement sur le clique du bouton Ajouter qui vérifie la conformité du mot de passe et envoit la requête au serveur
     btnAjouter.onclick = async () => {
         if (!nom.checkValidity()) {
             alert("Vous devez entrer un nom");
@@ -52,7 +52,7 @@ async function init() {
         }
     };
 }
-
+// permet de créer la liste des pays
 function remplirLesPays(data) {
     let idPays = document.getElementById('idPays');
 
@@ -64,7 +64,7 @@ function remplirLesPays(data) {
         console.log(pays.id);
     }
 }
-
+// créer le tableau des ecuries avec la possibilité de modifier directement dans le tableau et de pouvoir supprimer
 async function remplirLesEcuries(data) {
     for (const ecurie of data) {
         console.log(ecurie);

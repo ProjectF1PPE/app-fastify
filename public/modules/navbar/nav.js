@@ -1,11 +1,5 @@
-
+//lors du clique sur le bouton Connexion la fonction login est lancé
 btnConnexion.onclick = () => login();
-
-password1.onkeydown = (ev) => {
-    if (ev.keyCode === 13) {
-        login();
-    }
-};
 
 jQuery(function ($) {
     $(window).on('scroll', function () {
@@ -48,7 +42,7 @@ $(document).ready(function() {
         $('[data-toggle="tooltip"]').tooltip()
     })
 });
-
+//fonction login pour vérifier le mot de passe et lui donner l'accès au pannel admin si le mot de passe est correct
 async function login() {
     if (!password1.checkValidity()) {
         alert('Entrer un mot de passe');

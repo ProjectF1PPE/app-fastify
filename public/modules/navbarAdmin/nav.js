@@ -1,3 +1,5 @@
+// Fonction pour la navbar
+//fonction pour faire apparaître la navbar mais lorsqu'on scroll
 jQuery(function ($) {
     $(window).on('scroll', function () {
         if ($(this).scrollTop() >= 200) {
@@ -6,7 +8,7 @@ jQuery(function ($) {
             $('.navbar').removeClass('fixed-top');
         }
     });
-
+    //fonction pour afficher classement pilote et écurie dans la navbar
     function adjustNav() {
         var winWidth = $(window).width(),
             dropdown = $('.dropdown'),

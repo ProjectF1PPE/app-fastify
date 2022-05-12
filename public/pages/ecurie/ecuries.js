@@ -1,7 +1,7 @@
 "use strict";
 
 window.onload = init;
-
+// chargement des données
 async function init() {
     console.log('init');
 
@@ -14,7 +14,7 @@ async function init() {
 
     $('#haut').slideUp(3000);
 }
-
+//afficher le tableau des ecuries
 function afficher(data) {
     console.log(data)
 
