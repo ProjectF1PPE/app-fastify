@@ -23,7 +23,7 @@ async function init() {
     }
 
     try {
-        const data = (await axios.get("/api/ecuries")).data;
+        const data = (await axios.get("/api/admin/ecuries")).data;
         remplirLesEcuries(data);
     } catch (e) {
         throw e;
@@ -111,24 +111,25 @@ async function remplirLesEcuries(data) {
             let selectPilotes = document.createElement('select');
             selectPilotes.id = "idPiloteSelectionne" + i;
 
+            let aucunPiloteOption = new Option("Aucun");
+            selectPilotes.appendChild(aucunPiloteOption);
+
+            let piloteEcurie = ecurie.pilotes[i];
+            if (piloteEcurie === undefined) {
+                aucunPiloteOption.selected = true;
+            }
+
             for (const pilote of lesPilotes) {
                 let option;
 
-                /*
-                if (pilote.id == ) {
-                    option = new Option(pilote.nom, pilote.id, false, true);
+                if (piloteEcurie !== undefined && piloteEcurie.id == pilote.id) {
+                    option = new Option(pilote.nom + " " + pilote.prenom, pilote.id, true, true);
                 } else {
-
-                 */
-                option = new Option(pilote.nom + " " + pilote.prenom, pilote.id);
-
+                    option = new Option(pilote.nom + " " + pilote.prenom, pilote.id);
+                }
 
                 selectPilotes.appendChild(option);
             }
-
-            let selectPiloteOption = new Option("Aucun");
-            selectPiloteOption.selected = true;
-            selectPilotes.appendChild(selectPiloteOption);
 
             selectPilotes.classList.add('form-select');
             tr.insertCell().appendChild(selectPilotes);
@@ -152,17 +153,42 @@ async function remplirLesEcuries(data) {
             }
 
             try {
-                const res = (await axios.put("/api/admin/ecurie", {
-                    data: {
-                        id: ecurie.idEcurie,
-                        nom: document.getElementById('nomSelectionne').value,
-                        idPays: document.getElementById('idPaysSelectionne').value
+                let changedData = {
+                    id: ecurie.idEcurie
+                };
+
+                let changedName = document.getElementById('nomSelectionne').value;
+                if (changedName !== ecurie.nom) {
+                    changedData.nom = changedName;
+                }
+
+                let changedIdPays = document.getElementById('idPaysSelectionne').value;
+                if (changedIdPays !== ecurie.idPays) {
+                    changedData.idPays = changedIdPays;
+                }
+
+                let changedPilotes = [];
+                for (let i = 0; i < 3; i++) {
+                    let pilote = document.getElementById('idPiloteSelectionne' + i).value;
+                    if (pilote !== undefined) {
+                        changedPilotes.push({
+                            id: pilote,
+                            ordre: i+1
+                        });
                     }
+                }
+
+                changedData.pilotes = changedPilotes;
+
+                console.log(changedData);
+
+                const res = (await axios.put("/api/admin/ecurie", {
+                    data: changedData
                 }));
 
                 if (res.status === 204) {
                     alert("L'écurie a bien été modifiée");
-                    location.reload();
+                    //location.reload();
                 } else {
                     alert("Erreur : l'écurie n'a pas été correctement modifiée");
                 }

@@ -1,25 +1,17 @@
 const pool = require('../../database');
 
 const getEcuries = async (req, reply) => {
-    const [ecuries, ecuriesFields] = await pool.query('SELECT id, nom, photo, idPays from ecurie');
+    const [rows, fields] = await pool.query('SELECT ecurie.id as idEcurie, ecurie.nom as nomEcurie, ecurie.photo, pays.id as idPays, pays.nom as nomPays from ecurie join pays on ecurie.idPays = pays.id');
     const [pilotes, pilotesFields] = await pool.query('SELECT id, nom, prenom, ordre, idEcurie from pilote');
-    const [pays, paysFields] = await pool.query('SELECT id, nom from pays');
 
     let result = [];
 
-    for (const ecurie of ecuries) {
-        let nomPays = "Pays non trouvé";
-        for (const unPays of pays) {
-            if (unPays.id == ecurie.idPays) {
-                nomPays = unPays.nom;
-            }
-        }
-
+    for (const ecurie of rows) {
         let p = [];
-
         for (const pilote of pilotes) {
-            if (pilote.idEcurie == ecurie.id) {
+            if (pilote.idEcurie === ecurie.idEcurie) {
                 p.push({
+                    'id': pilote.id,
                     'ordre': pilote.ordre,
                     'nom': pilote.nom + ' ' + pilote.prenom
                 });
@@ -27,9 +19,10 @@ const getEcuries = async (req, reply) => {
         }
 
         result.push({
-            'id': ecurie.id,
-            'nom': ecurie.nom,
-            'nomPays': nomPays,
+            'idEcurie': ecurie.idEcurie,
+            'nomEcurie': ecurie.nomEcurie,
+            "idPays": ecurie.idPays,
+            'nomPays': ecurie.nomPays,
             'pilotes': p
         });
     }
@@ -59,14 +52,20 @@ const putEcurie = async (req, reply) => {
     const body = req.body;
     console.log(body.data);
 
-    if (body.data.nom != undefined) {
+    if (body.data.nom !== undefined) {
         const [rows, fields] = await pool.query('UPDATE ecurie SET nom=? where id=?', [body.data.nom, body.data.id]);
     }
 
-    if (body.data.idPays != undefined) {
+    if (body.data.idPays !== undefined) {
         const [rows, fields] = await pool.query('UPDATE ecurie SET idPays=? where id=?', [body.data.idPays, body.data.id]);
     }
 
+    if (body.data.pilotes !== undefined) {
+        for (let pilote of body.data.pilotes) {
+            console.log("update " + body.data.id + " - " + pilote.ordre + " - " + pilote.id);
+            await pool.query('UPDATE pilote SET idEcurie=?, ordre=? where id=?', [body.data.id, pilote.ordre, pilote.id]);
+        }
+    }
 
     reply.code(204);
 }
