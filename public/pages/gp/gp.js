@@ -45,8 +45,7 @@ function afficher(data) {
         let pied = document.createElement('div');
         pied.classList.add('card-footer', 'text-muted', 'text-center');
 
-        let date = Date.parse(grandprix.date).toString("MMMM yyyy");
-        pied.innerText = date;
+        pied.innerText = grandprix.date;
         carte.appendChild(pied);
 
         col.appendChild(carte);

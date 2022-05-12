@@ -50,6 +50,11 @@ $(document).ready(function() {
 });
 
 async function login() {
+    if (!password1.checkValidity()) {
+        alert('Entrer un mot de passe');
+        return;
+    }
+
     try {
         const data = (await axios.post("/api/admin/login", {password:password1.value}));
         alert("Vous êtes connecté");

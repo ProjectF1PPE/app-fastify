@@ -57,15 +57,16 @@ const deleteEcurie = async (req, reply) => {
 
 const putEcurie = async (req, reply) => {
     const body = req.body;
-    console.log(body);
+    console.log(body.data);
 
-    if (body.nom != undefined) {
-        const [rows, fields] = await pool.query('UPDATE ecurie SET nom=? where id=?', [body.nom, body.id]);
+    if (body.data.nom != undefined) {
+        const [rows, fields] = await pool.query('UPDATE ecurie SET nom=? where id=?', [body.data.nom, body.data.id]);
     }
 
-    if (body.idPays != undefined) {
-        const [rows, fields] = await pool.query('UPDATE ecurie SET idPays=? where id=?', [body.idPays, body.id]);
+    if (body.data.idPays != undefined) {
+        const [rows, fields] = await pool.query('UPDATE ecurie SET idPays=? where id=?', [body.data.idPays, body.data.id]);
     }
+
 
     reply.code(204);
 }

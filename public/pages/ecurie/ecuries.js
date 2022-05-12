@@ -21,10 +21,10 @@ function afficher(data) {
     for (let ecurie of data) {
         let tr = document.getElementById("lesLignes").insertRow();
 
-        tr.insertCell().innerText = ecurie.nom
+        tr.insertCell().innerText = ecurie.nomEcurie
 
         let img = new Image()
-        img.src = "/pages/ecurie/ressource/" + ecurie.id + ".png";
+        img.src = "/pages/ecurie/ressource/" + ecurie.idEcurie + ".png";
         img.onerror = () => {
             img.src = "/pages/ecurie/ressource/default.png"
         }
