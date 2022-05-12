@@ -7,14 +7,6 @@ jQuery(function ($) {
         }
     });
 
-    btnConnexion.onclick = () => login();
-
-    password1.onkeydown = (ev) => {
-        if (ev.keyCode === 13) {
-            login();
-        }
-    };
-
     function adjustNav() {
         var winWidth = $(window).width(),
             dropdown = $('.dropdown'),
@@ -40,21 +32,5 @@ jQuery(function ($) {
     adjustNav();
 
 });
-$(document).ready(function() {
-    $('#loginModal').modal('show');
-    $(function () {
-        $('[data-toggle="tooltip"]').tooltip()
-    })
-});
 
-async function login() {
-    try {
-        const data = (await axios.post("/api/admin/login", {password:password1.value}));
-        alert("Vous êtes connecté");
-        window.location.href='/index.html';
-    } catch (e) {
-        alert("Mot de passe incorrect");
-        throw e;
-    }
-}
 
