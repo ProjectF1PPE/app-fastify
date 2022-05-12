@@ -86,7 +86,7 @@ async function remplirLesEcuries(data) {
             img.src = "/pages/ecurie/admin/img/default.png"
         }
         tr.insertCell().appendChild(img);
-
+        // zone de liste avec tout les pays dans le tableau
         let paysListe = document.createElement('select');
         paysListe.id = "idPaysSelectionne";
 
@@ -106,7 +106,6 @@ async function remplirLesEcuries(data) {
         ecurie.pilotes.sort((piloteA, piloteB) => {
             return piloteA.ordre - piloteB.ordre
         });
-
         for (let i = 0; i < 3; i++) {
             let selectPilotes = document.createElement('select');
             selectPilotes.id = "idPiloteSelectionne" + i;
