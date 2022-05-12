@@ -9,6 +9,8 @@ const Pilote = {
         nom: { type: 'string' },
         prenom: { type: 'string' },
         idPays: { type: 'string' },
+        idEcurie: { type: 'integer' },
+        ordre: { type: 'integer' }
     },
 }
 

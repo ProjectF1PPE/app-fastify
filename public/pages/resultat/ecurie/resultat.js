@@ -4,6 +4,14 @@ window.onload = init
 
 async function init() {
     try {
+        await axios.post("/api/authorization", {}, { headers: {Authorization: sessionStorage.getItem("token")}});
+    } catch (e) {
+        alert("Votre session a expiré");
+        window.location.href='/';
+        throw e;
+    }
+
+    try {
         const data = (await axios.get("/api/resultats/gp")).data;
         remplirLesGrandsPrix(data);
     } catch(e) {

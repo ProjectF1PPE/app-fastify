@@ -47,7 +47,7 @@
             <div class="col-auto">
                 <label for="nom" class="col-form-label obligatoire" style="color:white">Pays : </label>
 
-                <select class="form-select input-sm" id='idPays' style="width:300px"></select>
+                <label for='idPays'></label><select class="form-select input-sm" id='idPays' style="width:300px"></select>
             </div>
             <div class="text-center mt-3" style="padding: 20px">
                 <button id='btnAjouter' class="btn btn btn-danger" >Ajouter</button>
@@ -72,12 +72,6 @@
                         <th style='width:15%'>Pilote 3</th>
                         <th style='width:15%'>Modifier</th>
                         <th style='width:15%'>Supprimer</th>
-
-                        <!---
-                        <th><button id="btnModifier" class="bi bi-pencil-square"></button></th>
-                        <th><button id="btnSupprimer" class="bi bi-backspace-fill"></button></th>
-                        --->
-
                     </tr>
                     </thead>
                     <tbody id="lesLignes"></tbody>

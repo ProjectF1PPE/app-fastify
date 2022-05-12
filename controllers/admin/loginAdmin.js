@@ -10,16 +10,11 @@ const adminpassword = fs.readFileSync('./admin-password.hash', {
 const loginAdmin = async (req, reply) => {
     const body = req.body;
     const password = body.password;
-    const rememberMe = body.rememberMe;
 
     const match = await bcrypt.compare(password, adminpassword);
 
     if (match) {
         let options =  {};
-
-        if (!rememberMe) {
-            options.expiresIn = "3h";
-        }
 
         reply.send(jwt.sign({}, adminpassword, options));
     } else {

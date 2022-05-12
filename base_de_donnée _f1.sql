@@ -8,7 +8,7 @@ SET default_storage_engine=InnoDb;
 CREATE TABLE pays
 (
     id char(2) primary key,
-    nom varchar(40) NOT NULL
+    nom varchar(60) NOT NULL
 );
 
 INSERT INTO pays (id, nom)
@@ -330,7 +330,7 @@ CREATE TABLE pilote
     dateNaissance DATE,
     ordre int,
     idPays char(2) NOT NULL,
-	idEcurie int NOT NULL,
+	idEcurie int,
     FOREIGN KEY (idPays) REFERENCES pays (id),
 	FOREIGN KEY (idEcurie) REFERENCES ecurie (id)
 );

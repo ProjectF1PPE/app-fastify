@@ -53,17 +53,25 @@ const putEcurie = async (req, reply) => {
     console.log(body.data);
 
     if (body.data.nom !== undefined) {
-        const [rows, fields] = await pool.query('UPDATE ecurie SET nom=? where id=?', [body.data.nom, body.data.id]);
+        const [rows, fields] = await pool.query('UPDATE ecurie SET nom=? where id=?', [body.data.nom, body.data.id], err => reply.send(err));
     }
 
     if (body.data.idPays !== undefined) {
-        const [rows, fields] = await pool.query('UPDATE ecurie SET idPays=? where id=?', [body.data.idPays, body.data.id]);
+        const [rows, fields] = await pool.query('UPDATE ecurie SET idPays=? where id=?', [body.data.idPays, body.data.id], err => reply.send(err));
+    }
+
+    if (body.data.removedPilotes !== undefined) {
+        console.log(body.data.removedPilotes);
+        for (let pilote of body.data.removedPilotes) {
+            console.log(pilote);
+            await pool.query('UPDATE pilote SET idEcurie=?, ordre=? where id=?', [null, null, pilote], err => reply.send(err));
+        }
     }
 
     if (body.data.pilotes !== undefined) {
         for (let pilote of body.data.pilotes) {
-            console.log("update " + body.data.id + " - " + pilote.ordre + " - " + pilote.id);
-            await pool.query('UPDATE pilote SET idEcurie=?, ordre=? where id=?', [body.data.id, pilote.ordre, pilote.id]);
+            console.log("update ecurieid=" + body.data.id + " piloteordre=" + pilote.ordre + " and id=" + pilote.id);
+            await pool.query('UPDATE pilote SET idEcurie=?, ordre=? where id=?', [body.data.id, pilote.ordre, pilote.id], err => reply.send(err));
         }
     }
 
