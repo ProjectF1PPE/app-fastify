@@ -1,9 +1,6 @@
 const {
-    getPilotes,
-    postPilote, putPilote,
+    getPilotes, postPilote, deletePilote, putPilote,
 } = require('../../controllers/admin/pilotesAdmin')
-
-const authorizedOnly = require('../../middlewares/autorizedOnly');
 
 const Pilote = {
     type: 'object',
@@ -16,13 +13,6 @@ const Pilote = {
 }
 
 const getPilotesOpts = {
-    schema: {
-        response: {
-            200: {
-                type: 'array'
-            },
-        },
-    },
     //preHandler: authorizedOnly,
     handler: getPilotes,
 }
@@ -39,6 +29,18 @@ const postPiloteOpts = {
     handler: postPilote,
 }
 
+const deletePiloteOpts = {
+    schema: {
+        response: {
+            200: {
+                type: 'array'
+            },
+        },
+    },
+    //preHandler: authorizedOnly,
+    handler: deletePilote,
+}
+
 const putPiloteOpts = {
     schema: {
         response: {
@@ -52,8 +54,9 @@ const putPiloteOpts = {
 }
 
 function adminPilotesRoutes(fastify, options, done) {
-    fastify.get('/api/admin/pilotes', getPilotesOpts)
+    fastify.get('/api/admin/pilote', getPilotesOpts)
     fastify.post('/api/admin/pilote', postPiloteOpts)
+    fastify.delete('/api/admin/pilote', deletePiloteOpts)
     fastify.put('/api/admin/pilote', putPiloteOpts)
 
     done()
