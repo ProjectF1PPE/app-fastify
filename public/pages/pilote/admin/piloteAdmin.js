@@ -34,13 +34,31 @@ async function init() {
         if (id === undefined) {
             return;
         }
-
+        let id = document.getElementById('id');
+        if (!id.checkValidity()) {
+            alert("Vous devez entrer un numéro");
+            return;
+        }
+        let nom = document.getElementById('nom');
+        if (!nom.checkValidity()) {
+            alert("Vous devez entrer un nom");
+            return;
+        }
+        let prenom = document.getElementById('prenom');
+        if (!prenom.checkValidity()) {
+            alert("Vous devez entrer un prenom");
+            return;
+        }
+        let ordre = document.getElementById('ordre');
+        if (!ordre.checkValidity()) {
+            alert("Vous devez entrer l'ordre");
+            return;
+        }
         try {
             const res = (await axios.post("/api/admin/pilote", {
-                idPays: id,
+                id: id.value,
                 nom: nom.value,
                 prenom: prenom.value,
-                id: id.value,
                 ordre: ordre.value,
                 idEcurie: idEcurie.value
             }));
@@ -75,7 +93,7 @@ async function remplirLesPilotes(data) {
         tr.insertCell().innerText = pilote.nom + " " + pilote.prenom
 
         let img = document.createElement('img');
-        img.src = '/pages/pilote/ressource/pays/' + pilote.idPays + '.png';
+        img.src = '/ressource/pays/' + pilote.idPays + '.png';
         img.style.width = "40px";
         img.style.height = "25px";
         img.alt = "";
@@ -83,11 +101,32 @@ async function remplirLesPilotes(data) {
 
         tr.insertCell().innerText = pilote.idEcurie;
 
-        tr.insertCell().innerText = pilote.ordre;
 
+        let btnModifier = document.createElement('button');
+        btnModifier.classList.add('bi', 'bi-pencil-square');
+        btnModifier.type = "submit";
+
+        btnModifier.onclick = async () => {
+            try {
+                const res = (await axios.delete("/api/admin/pilote", {
+                    data: {
+                        id: pilote.id
+                    }
+                }));
+
+                if (res.status === 204) {
+                    alert("Le pilote a bien été modifié");
+                } else {
+                    alert("Erreur : le pilote n'a pas été correctement modifié");
+                }
+            } catch(e) {
+                throw e;
+            }
+        };
+        tr.insertCell().appendChild(btnModifier);
 
         let btnSupprimer = document.createElement('button');
-        btnSupprimer.innerHTML = "Supprimer";
+        btnSupprimer.classList.add('bi','bi-backspace-fill');
         btnSupprimer.type = "submit";
 
         btnSupprimer.onclick = async () => {
