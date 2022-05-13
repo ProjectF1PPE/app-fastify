@@ -7,7 +7,6 @@ async function init() {
     try {
         await axios.post("/api/authorization", {}, { headers: {Authorization: sessionStorage.getItem("token")}});
     } catch (e) {
-        alert("Votre session a expiré");
         window.location.href='/';
         throw e;
     }
@@ -204,7 +203,7 @@ async function remplirLesEcuries(data, lesPays, lesPilotes) {
                 });
 
                 alert("L'écurie a bien été modifiée");
-                //location.reload();
+                location.reload();
 
             } catch (e) {
                 alert("Erreur : l'écurie n'a pas été correctement modifiée");
