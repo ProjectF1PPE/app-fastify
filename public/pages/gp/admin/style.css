@@ -2,26 +2,14 @@
 @import url('https://fonts.googleapis.com/css?family=Lobster');
 
 
-.content {
-    padding: 120px 0;
-}
-
 body {
+    background:linear-gradient(to bottom, black 80%, red);
     font-family: 'Josefin Sans', sans-serif;
     list-style-type: none;
     background-repeat: no-repeat;
     background-size: 100% 100%;
     background-attachment: fixed;
-}
-.row {
-    background-color:lightsteelblue;
-    border-radius: 2%;
-}
-.pilotes{
-    margin-left:10%;
-    margin-top:50px;
-    margin-right:10%;
-    font-size: 80%;
+    margin-top:10%;
 }
 .img1 {
     width:100%;
@@ -29,14 +17,13 @@ body {
     max-width: 100%;
 
 }
-.photopilote{
-    width:20%;
+.row{
+    background-color:lightsteelblue;
+    border-radius: 2%;
 }
-@media screen and (max-width: 767px) {
-    container {
-        display:none;
-    }
-    .logo {
-        display:none;
-    }
+.gp{
+    margin-left:10%;
+    margin-top:50px;
+    margin-right:10%;
+    font-size: 80%;
 }

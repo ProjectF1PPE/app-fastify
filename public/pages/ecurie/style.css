@@ -10,12 +10,12 @@ body {
      background-attachment: fixed;
  }
 .row {
-    background-color:dimgrey;
+    background-color:lightsteelblue;
     border-radius: 2%;
 }
 .ecuries{
     margin-left:10%;
-    margin-top:200px;
+    margin-top:50px;
     margin-right: 10%;
     font-size: 80%;
 }
