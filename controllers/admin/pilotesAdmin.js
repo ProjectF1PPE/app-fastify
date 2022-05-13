@@ -5,10 +5,12 @@ const getPilotes = async (req, reply) => {
     const [ecuries, ecuriesFields] = await pool.query('SELECT id, nom from ecurie');
     const [pays, paysFields] = await pool.query('SELECT id, nom from pays');
 
-    let data = [];
+    let data = {};
     data.pilotes = pilotes;
     data.ecuries = ecuries;
     data.pays = pays;
+
+    console.log(data);
 
     reply.send(data);
 }
