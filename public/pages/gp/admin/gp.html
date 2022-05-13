@@ -31,46 +31,25 @@
     <div>
         <div class="mt-3">
             <div class="col-sm-3">
-                <label for="circuit" class="col-form-label obligatoire" style="color:white">Circuit : </label>
-                <input id="circuit"
-                       type="text"
-                       class="form-control ctrl"
-                       required
-                       minlength='1'
-                       maxlength='30'
-                       style="width:300px"
-                       pattern="^[A-Za-z]( ?[A-Za-z])*$"
-                       autocomplete="off">
-
-                <span class='messageErreur'></span>
+                <label for="ville" class="col-form-label obligatoire" style="color:white">Circuit : </label>
+                <input id="ville" type="text" class="form-control ctrl" required style="width:300px" autocomplete="off">
             </div>
         </div>
         <div style="display: flex">
             <div class="col-sm-3">
-                <label for="idPaysSelectionne" class="col-form-label obligatoire" style="color:white">Pays : </label>
-
+                <label for="idPays" class="col-form-label obligatoire" style="color:white">Pays : </label>
                 <select class="form-select input-sm" id='idPays' style="width:300px"></select>
             </div>
             <div class="col-sm-3">
                 <label for="date" class="col-form-label obligatoire" style="color:white">Date : </label>
-                <input id="date"
-                       type="text"
-                       class="form-control ctrl"
-                       required
-                       minlength='8'
-                       maxlength='10'
-                       maxlength='10'
-                       style="width:300px"
-                       pattern="`^\d{1,2}/\d{1,2}/\d{4}$`"
-                       autocomplete="off">
+                <input id="date" type="text" class="form-control ctrl" required style="width:300px" autocomplete="off">
 
             </div>
             <div class="text-center mt-3" style="padding: 20px">
                 <button id='btnAjouter' class="btn btn btn-danger" >Ajouter</button>
             </div>
         </div>
-            </div>
-
+    </div>
 </div>
 <div class="ecuries">
     <div class="row">
@@ -80,17 +59,11 @@
                     <thead>
                     <tr>
                         <th style='width:2%'>Id</th>
-                        <th style='width:15%'>Nom</th>
-                        <th style='width:15%'>Date</th>
                         <th style='width:15%'>Circuit</th>
+                        <th style='width:15%'>Date</th>
                         <th style='width:15%'>Pays</th>
                         <th style='width:15%'>Modifier</th>
-
-                        <!---
-                        <th><button id="btnModifier" class="bi bi-pencil-square"></button></th>
-                        <th><button id="btnSupprimer" class="bi bi-backspace-fill"></button></th>
-                        --->
-
+                        <th style='width:15%'>Supprimer</th>
                     </tr>
                     </thead>
                     <tbody id="lesLignes"></tbody>
