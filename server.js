@@ -27,6 +27,7 @@ fastify.register(require('./routes/resultatsGP'));
 fastify.register(require('./routes/resultatsPilote'));
 
 fastify.register(require('./routes/admin/adminEcurie'));
+fastify.register(require('./routes/admin/adminGP'));
 fastify.register(require('./routes/admin/adminPilote'));
 fastify.register(require('./routes/admin/loginAdmin'));
 fastify.register(require('./routes/admin/resultat'));
