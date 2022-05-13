@@ -84,9 +84,9 @@ async function remplirLesEcuries(data, lesPays, lesPilotes) {
         tr.insertCell().appendChild(nomChamp);
 
         let img = new Image()
-        img.src = "/pages/ecurie/admin/img/" + ecurie.idEcurie + ".png";
+        img.src = "/pages/ecurie/ressource/" + ecurie.idEcurie + ".png";
         img.onerror = () => {
-            img.src = "/pages/ecurie/admin/img/default.png"
+            img.src = "/pages/ecurie/ressource/default.png"
         }
         tr.insertCell().appendChild(img);
 

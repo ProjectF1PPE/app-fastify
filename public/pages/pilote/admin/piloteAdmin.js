@@ -75,7 +75,7 @@ async function remplirLesPilotes(data) {
         tr.insertCell().innerText = pilote.nom + " " + pilote.prenom
 
         let img = document.createElement('img');
-        img.src = '/ressource/pays/' + pilote.idPays + '.png';
+        img.src = '/pages/pilote/ressource/pays/' + pilote.idPays + '.png';
         img.style.width = "40px";
         img.style.height = "25px";
         img.alt = "";
