@@ -60,7 +60,6 @@ async function init() {
                 nom: nom.value,
                 prenom: prenom.value,
                 ordre: ordre.value,
-                idEcurie: idEcurie.value
             }));
 
             if (res.status === 204) {
@@ -92,12 +91,7 @@ async function remplirLesPilotes(data) {
         tr.insertCell().innerText = pilote.id
         tr.insertCell().innerText = pilote.nom + " " + pilote.prenom
 
-        let img = document.createElement('img');
-        img.src = '/ressource/pays/' + pilote.idPays + '.png';
-        img.style.width = "40px";
-        img.style.height = "25px";
-        img.alt = "";
-        tr.insertCell().appendChild(img);
+
 
         tr.insertCell().innerText = pilote.idEcurie;
 
