@@ -159,8 +159,66 @@ function remplirLesPilotes(pilotes, pays, ecuries) {
         btnModifier.type = "submit";
 
         btnModifier.onclick = async () => {
+            let id = document.getElementById('idSelectionne' + pilote.id);
+            if (!id.checkValidity()) {
+                alert("Vous devez mettre un numéro");
+                return
+            }
+
+            let nom = document.getElementById('nomSelectionne' + pilote.id);
+            if (!nom.checkValidity()) {
+                alert("Vous devez mettre un nom");
+                return
+            }
+
+            let prenom = document.getElementById('prenomSelectionne' + pilote.id);
+            if (!prenom.checkValidity()) {
+                alert("Vous devez mettre un prénom");
+                return
+            }
+
+            let idPays = document.getElementById('idPaysSelectionne' + pilote.id);
+            if (!idPays.checkValidity()) {
+                alert("Vous devez sélectionner un pays");
+                return
+            }
+
+            let idEcurie = document.getElementById('idEcurieSelectionne' + pilote.id);
+            if (!idEcurie.checkValidity()) {
+                alert("Vous devez sélectionner une écurie");
+                return
+            }
+
+            let ordre = document.getElementById('ordreSelectionne' + pilote.id);
+            if (!ordre.checkValidity()) {
+                alert("Vous devez mettre un ordre");
+                return
+            }
+
+            let changedData = {
+                id: pilote.id
+            };
+            if (id.value != pilote.id) {
+                changedData.newId = id.value;
+            }
+            if (nom.value != pilote.nom) {
+                changedData.nom = nom.value;
+            }
+            if (prenom.value != pilote.prenom) {
+                changedData.prenom = prenom.value;
+            }
+            if (idPays.value != pilote.idPays) {
+                changedData.idPays = idPays.value;
+            }
+            if (idEcurie.value != pilote.idEcurie) {
+                changedData.idEcurie = idEcurie.value;
+            }
+            if (ordre.value != pilote.ordre) {
+                changedData.ordre = ordre.value;
+            }
+            
             try {
-                await axios.put("/api/admin/pilote", {id: pilote.id});
+                await axios.put("/api/admin/pilote", changedData);
                 alert("Le pilote a bien été modifié");
             } catch(e) {
                 alert("Erreur : le pilote n'a pas été correctement modifié");
