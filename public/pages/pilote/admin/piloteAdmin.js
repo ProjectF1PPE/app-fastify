@@ -216,7 +216,7 @@ function remplirLesPilotes(pilotes, pays, ecuries) {
             if (ordre.value != pilote.ordre) {
                 changedData.ordre = ordre.value;
             }
-            
+
             try {
                 await axios.put("/api/admin/pilote", changedData);
                 alert("Le pilote a bien été modifié");
