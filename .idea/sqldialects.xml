@@ -2,7 +2,5 @@
 <project version="4">
   <component name="SqlDialectMappings">
     <file url="file://$PROJECT_DIR$/base_de_donnée _f1.sql" dialect="MariaDB" />
-    <file url="file://$PROJECT_DIR$/createEcuries.sql" dialect="MariaDB" />
-    <file url="file://$PROJECT_DIR$/createPilotes.sql" dialect="MariaDB" />
   </component>
 </project>
