@@ -20,9 +20,11 @@ body {
 .row{
     background-color:lightsteelblue;
     border-radius: 2%;
+    width:1000px;
+    height:auto;
 }
 .gp{
-    margin-left:10%;
+    margin-left:15%;
     margin-top:50px;
     margin-right:10%;
     font-size: 80%;

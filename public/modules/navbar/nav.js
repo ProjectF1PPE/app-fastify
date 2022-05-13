@@ -1,7 +1,9 @@
 //lors du clique sur le bouton Connexion la fonction login est lancé
-btnConnexion.onclick = () => login();
+
 
 jQuery(function ($) {
+    //btnConnexion2.onclick = () => login();
+
     $(window).on('scroll', function () {
         if ($(this).scrollTop() >= 200) {
             $('.navbar').addClass('fixed-top');
@@ -35,27 +37,22 @@ jQuery(function ($) {
     adjustNav();
 
 });
-
-$(document).ready(function() {
-    $('#loginModal').modal('show');
-    $(function () {
-        $('[data-toggle="tooltip"]').tooltip()
-    })
-});
 //fonction login pour vérifier le mot de passe et lui donner l'accès au pannel admin si le mot de passe est correct
 async function login() {
     if (!password1.checkValidity()) {
-        alert('Entrer un mot de passe');
+        Std.afficherErreur('Entrer un mot de passe');
         return;
     }
 
     try {
         const data = (await axios.post("/api/admin/login", { password:password1.value})).data;
-        alert("Vous êtes connecté");
+
         sessionStorage.setItem("token", data);
-        window.location.href='/admin';
+        let parametre = {message : "Vous êtes connecté", fermeture : 1, surFermeture : () =>  window.location.href='/admin', type : 'success'}
+        Std.afficherMessage(parametre);
+
     } catch (e) {
-        alert("Mot de passe incorrect");
+        Std.afficherErreur("Mot de passe incorrect");
         throw e;
     }
 }

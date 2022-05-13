@@ -1,56 +1,71 @@
-"use strict";
+﻿"use strict";
 
-window.onload = init;
+window.onload = init
 
 async function init() {
     try {
-        const data = (await axios.get("/api/resultats/pilotes/")).data;
-        for (const element of data) {
-            let label = document.createElement('label');
-            label.id = element.id;
-            label.innerText = element.nom;
-            label.classList.add("rounded", "p-2", "m-1");
-            label.draggable = true;
-            label.ondragstart = (e) => e.dataTransfer.setData('id', e.target.id);
-            if (element.groupe === null)
-                equipe.appendChild(label);
-            else
-                document.getElementById(element.groupe).appendChild(label);
-        }
+        await axios.post("/api/authorization", {}, { headers: {Authorization: sessionStorage.getItem("token")}});
     } catch (e) {
+        alert("Votre session a expiré");
+        window.location.href='/';
         throw e;
     }
 
-
-// événement sur les balises groupeA à groupeH
-for (const groupe of document.querySelectorAll('.groupe')) {
-    groupe.ondragover = (e) => e.preventDefault();
-    groupe.ondrop = (e) => {
-        let id = e.dataTransfer.getData('id');
-        let label = document.getElementById(id);
-        groupe.appendChild(label);
-        $.ajax({
-            url: 'ajax/attribuergroupe.php',
-            type: 'POST',
-            data: {id: id, groupe: groupe.id},
-            dataType: 'json',
-            error: (reponse) => Std.afficherErreur(reponse.responseText)
-        })
+    try {
+        const data = (await axios.get("/api/resultats/gp")).data;
+        remplirLesGrandsPrix(data);
+    } catch(e) {
+        throw e;
     }
 }
 
-// événement sur la balise 'equipe'
-equipe.ondragover = (e) => e.preventDefault();
-equipe.ondrop = (e) => {
-    let id = e.dataTransfer.getData('id');
-    let label = document.getElementById(id);
-    equipe.appendChild(label);
-    $.ajax({
-        url: 'ajax/retirergroupe.php',
-        type: 'POST',
-        data: {id: id},
-        dataType: 'json',
-        error: (reponse) => Std.afficherErreur(reponse.responseText)
-    })
+function remplirLesGrandsPrix(data) {
+    let selectGp = document.getElementById('selectGp');
+
+    for (const gp of data) {
+        selectGp.appendChild(new Option(gp.nom, gp.id));
+    }
+
+    selectGp.onchange = async (ev) => {
+        try {
+            const data = (await axios.get("/api/resultats/ecuries/", { params: { gp: ev.target.value }})).data;
+            console.log(data);
+            afficherPilote(data);
+        } catch(e) {
+            throw e;
+        }
+    }
 }
+
+function afficherPilote(data) {
+    lesLignes.innerHTML = "";
+
+    for (let pilote of data) {
+        let tr = document.getElementById("lesLignes").insertRow();
+
+        tr.insertCell().innerText = pilote.place;
+        tr.classList.add('text-white');
+        let img = new Image();
+        img.src = "/pages/pilote/ressource/" + pilote.idPilote + ".jpg";
+        img.onerror = () => {
+            img.src = "/pages/pilote/ressource/1.jpg"
+        }
+        tr.insertCell().appendChild(img)
+
+        tr.insertCell().innerText = pilote.nom + " " + pilote.prenom;
+        tr.classList.add('text-white');
+        let img2 = new Image();
+        img2.src = '/ressource/pays/' + pilote.idPays + '.png';
+        img2.onerror = () => {
+            img2.src = "/ressource/f1.png";
+        }
+        img2.style.width = "40px";
+        img2.style.height = "25px";
+        img2.alt = "";
+        tr.insertCell().appendChild(img2);
+
+        tr.insertCell().innerText = pilote.point;
+        tr.classList.add('text-white');
+    }
 }
+
