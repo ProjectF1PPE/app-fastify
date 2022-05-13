@@ -6,18 +6,10 @@ const adminpassword = fs.readFileSync('./admin-password.hash', {
 });
 
 const authorizedOnly = async (request, reply) => {
-    console.log(request.headers);
-
     const authorization = request.headers.authorization;
 
-    console.log(authorization);
-
-    if (!authorization) {
-        return reply.unauthorized("Not authorized !");
-    }
-
-    if (!jwt.verify(authorization, adminpassword)) {
-        return reply.unauthorized("Pas authorized !");
+    if (!authorization || !jwt.verify(authorization, adminpassword)) {
+        return reply.unauthorized("Vous n'êtes pas autorisé !");
     }
 
     reply.code(204);

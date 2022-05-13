@@ -14,9 +14,7 @@ const loginAdmin = async (req, reply) => {
     const match = await bcrypt.compare(password, adminpassword);
 
     if (match) {
-        let options =  {};
-
-        reply.send(jwt.sign({}, adminpassword, options));
+        reply.send(jwt.sign({}, adminpassword));
     } else {
         reply.code(400).message('Mauvais mot de passe');
     }
