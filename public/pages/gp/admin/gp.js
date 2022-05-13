@@ -1,19 +1,31 @@
 "use strict";
 
 window.onload = init;
+
 async function init() {
     try {
-        await axios.post("/api/authorization", {}, { headers: {Authorization: sessionStorage.getItem("token")}});
+        await axios.post("/api/authorization", {}, {headers: {Authorization: sessionStorage.getItem("token")}});
     } catch (e) {
         alert("Votre session a expiré");
-        window.location.href='/';
+        window.location.href = '/';
         throw e;
     }
+    let lesPays;
+    try {
+        const data = (await axios.get("/api/pays")).data;
+        lesPays = data;
 
+        let idPays = document.getElementById('idPays');
+        for (const pays of data) {
+            idPays.appendChild(new Option(pays.nom, pays.id));
+        }
+    } catch (e) {
+        throw e;
+    }
     try {
         const data = (await axios.get("/api/gp")).data;
         afficherGp(data);
-    } catch(e) {
+    } catch (e) {
         throw e;
     }
 
@@ -22,12 +34,26 @@ async function init() {
             alert("Vous devez entrer un nom");
             return;
         }
+        let ville = document.getElementById('ville');
+        if (!ville.checkValidity()) {
+            alert("Vous devez entrer une ville");
+            return;
+        }
+        let date = document.getElementById('date');
+        if (!date.checkValidity()) {
+            alert("Vous devez entrer une date");
+            return;
+        }
+        let pays = document.getElementById('idPays');
+        if (!pays.checkValidity()) {
+            alert("Vous devez entrer un pays");
+            return;
+        }
         try {
             const res = (await axios.post("/api/admin/gp", {
-                nom: nom.value,
+                ville: ville.value,
                 date: date.value,
-                circuit : ville.value,
-                idPays: id
+                idPays: pays.value
             }));
 
             if (res.status === 204) {
@@ -44,40 +70,24 @@ async function init() {
 
 function afficherGp(data) {
 
-    for (const Gp of data) {
+    for (const gp of data) {
 
         let tr = document.getElementById("lesLignes").insertRow();
 
         tr.insertCell().innerText = gp.id;
 
-        let nomChamp = document.createElement("input");
-        nomChamp.id = "nomSelectionne";
-        nomChamp.type = "text";
-        nomChamp.value = ecurie.nomEcurie;
-        nomChamp.setAttribute("required", "true");
-        tr.insertCell().appendChild(nomChamp);
 
         let date = document.createElement("input");
         date.id = "dateSelectionne";
-        date.type = "text"
+        date.type = "text";
         date.value = gp.date;
         tr.insertCell().appendChild(date);
 
-        let circuitListe = document.createElement('select');
-        circuitListe.id = "circuitSelectionne";
-
-        for (let lesCircuits of lesCircuits) {
-            let option;
-            if (lesCircuits.id === gp.id) {
-                option = new Option(lesCircuits.nom, lesCircuits.id, false, true);
-            } else {
-                option = new Option(lesCircuits.nom, lesCircuits.id);
-            }
-            lesCircuits.appendChild(option);
-        }
-
-        circuitListe.classList.add('form-select');
-        tr.insertCell().appendChild(circuitListe);
+        let ville = document.createElement('input');
+        ville.id = "circuitSelectionne";
+        ville.type = "text";
+        date.value = gp.ville;
+        tr.insertCell().appendChild(ville);
 
         let paysListe = document.createElement('select');
         paysListe.id = "idPaysSelectionne";
@@ -99,9 +109,31 @@ function afficherGp(data) {
         btnModifier.classList.add('bi', 'bi-pencil-square');
         btnModifier.type = "submit";
 
-
-
         tr.insertCell().appendChild(btnModifier);
 
+
+        let btnSupprimer = document.createElement('button');
+        btnSupprimer.classList.add('bi','bi-backspace-fill');
+        btnSupprimer.type = "button";
+        btnSupprimer.onclick = async () => {
+            try {
+                await axios.delete("/api/admin/gp", {
+                    data: {
+                        id: gp.id
+                    }
+                });
+
+                alert("L'écurie a bien été supprimée");
+                location.reload();
+            } catch (e) {
+                alert("Erreur: L'écurie n'a pas été correctement supprimée");
+                throw e;
+            }
+        }
+        tr.insertCell().appendChild(btnSupprimer);
     }
+
+
+
 }
+
